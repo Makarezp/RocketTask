@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.launch_list
 
 import androidx.paging.PagingData
 import com.task.spacex.UnitTestBase

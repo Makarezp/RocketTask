@@ -18,7 +18,12 @@ class LaunchEntityMapperTest : UnitTestBase<LaunchEntityMapper>() {
 
         val actual = sut.map(fixtDocs)
 
-        val expected1 = LaunchEntity(fixtDoc1.id, fixtDoc1.name, fixtDoc1.links.patch.small)
+        val expected1 = LaunchEntity(
+            fixtDoc1.id,
+            fixtDoc1.name,
+            fixtDoc1.links.patch.small,
+            fixtDoc1.dateLocal
+        )
         assertEquals(expected1, actual.first())
     }
 }

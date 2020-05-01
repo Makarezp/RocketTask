@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.launch_list
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,7 +17,7 @@ class LaunchViewHolder(
     private val binding = LaunchItemBinding.bind(view)
 
     fun bind(launch: LaunchDomain) {
-        binding.rocket.text = launch.rocket
+        binding.rocket.text = launch.zonedDateTime.toString()
         glide.load(launch.patchURL)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)

@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.filter
 
 import com.flextrade.jfixture.annotations.Fixture
 import com.task.spacex.UnitTestBase

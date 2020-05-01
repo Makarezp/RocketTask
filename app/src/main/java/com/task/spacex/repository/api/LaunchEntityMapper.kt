@@ -6,6 +6,6 @@ import javax.inject.Inject
 class LaunchEntityMapper @Inject constructor() {
 
     fun map(docs: List<LaunchResponse.Doc>): List<LaunchEntity> {
-        return docs.map { LaunchEntity(it.id, it.name, it.links.patch.small) }
+        return docs.map { LaunchEntity(it.id, it.name, it.links.patch.small, it.dateLocal) }
     }
 }

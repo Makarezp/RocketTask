@@ -2,6 +2,10 @@ package com.task.spacex.repository.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.task.spacex.util.ZonedDateTimeConverter
+import java.time.ZonedDateTime
 
 @Database(
     entities = [
@@ -11,9 +15,23 @@ import androidx.room.RoomDatabase
     version = 1,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class SpaceXDatabase : RoomDatabase() {
 
     abstract fun launchDao(): LaunchDao
     abstract fun pageKeys(): PageKeyDao
 
+}
+
+class Converters {
+
+    @TypeConverter
+    fun toString(value: ZonedDateTime): String {
+        return  ZonedDateTimeConverter.toString(value)
+    }
+
+    @TypeConverter
+    fun toZonedDateTime(value: String): ZonedDateTime {
+        return ZonedDateTimeConverter.fromString(value)
+    }
 }

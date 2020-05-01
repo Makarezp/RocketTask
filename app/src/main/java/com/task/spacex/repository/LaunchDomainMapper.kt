@@ -10,7 +10,8 @@ class LaunchDomainMapper @Inject constructor(){
         return LaunchDomain(
             entity.id,
             entity.rocket,
-            entity.patchUrl
+            entity.patchUrl,
+            entity.zonedDateTime
         )
     }
 }

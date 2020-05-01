@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

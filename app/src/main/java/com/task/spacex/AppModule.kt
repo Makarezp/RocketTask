@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.task.spacex.util.ZonedDateTimeMoshiAdapter
+import com.task.spacex.util.MoshiZonedDateTimeAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +24,7 @@ class AppModule {
     fun provideMoshi(): Moshi =
         Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
-            .add(ZonedDateTimeMoshiAdapter())
+            .add(MoshiZonedDateTimeAdapter())
             .build()
 
     @Singleton

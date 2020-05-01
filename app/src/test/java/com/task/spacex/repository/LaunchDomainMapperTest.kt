@@ -19,5 +19,6 @@ class LaunchDomainMapperTest : UnitTestBase<LaunchDomainMapper>() {
         assert(fixtEntity.id == actual.id)
         assert(fixtEntity.rocket == actual.rocket)
         assert(fixtEntity.patchUrl == actual.patchURL)
+        assert(fixtEntity.zonedDateTime == actual.zonedDateTime)
     }
 }

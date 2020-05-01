@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.launch_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.task.spacex.databinding.RocketListFragmentBinding
+import com.task.spacex.ui.filter.FilterDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject

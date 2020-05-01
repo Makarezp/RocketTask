@@ -1,4 +1,4 @@
-package com.task.spacex.ui
+package com.task.spacex.ui.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
