@@ -34,4 +34,5 @@ ext {
     retrofiVersion = '2.9.0'
     moshiVersion = '1.12.0'
     moshiConverterVersion = '2.4.0'
+    pagingVersion = '3.0.0-rc01'
 }

@@ -8,7 +8,9 @@ data class LaunchRequest(
 ) {
     data class Options(
         @Json(name = "limit")
-        val limit: Int
+        val limit: Int,
+        @Json(name = "page")
+        val page: Int
     )
 
 }

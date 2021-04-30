@@ -13,9 +13,9 @@ data class LaunchResponse(
     @Json(name = "limit")
     val limit: Int,
     @Json(name = "nextPage")
-    val nextPage: Int,
+    val nextPage: Int?,
     @Json(name = "offset")
-    val offset: Int,
+    val offset: Int?,
     @Json(name = "page")
     val page: Int,
     @Json(name = "pagingCounter")
