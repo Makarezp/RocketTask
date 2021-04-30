@@ -3,4 +3,5 @@
     <string name="success">Success</string>
     <string name="failure">Failure</string>
     <string name="all">All</string>
+    <string name="apply">Apply</string>
 </resources>

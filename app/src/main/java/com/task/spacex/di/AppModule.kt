@@ -34,6 +34,7 @@ class AppModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
+    @Singleton
     @Provides
     fun provideGlide(@ApplicationContext context: Context): RequestManager =
         Glide.with(context)

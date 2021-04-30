@@ -23,7 +23,7 @@ class FilterDialogViewModel @Inject constructor(
     private val _dismissAction = MutableSharedFlow<Unit>()
     var dismissAction =_dismissAction.asSharedFlow()
 
-    // Simplification - view shouldn't be coupled with domain,
+    // Simplification - view shouldn't be coupled with domain
     val currentFilter: FilterDomain
         get() = _currentFilter
 
