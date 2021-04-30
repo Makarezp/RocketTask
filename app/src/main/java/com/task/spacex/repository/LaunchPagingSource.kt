@@ -16,7 +16,7 @@ class LaunchPagingSource @Inject constructor(
             val response = service.getLaunches(LaunchRequest(
                 LaunchRequest.Options(params.loadSize, key)
             ))
-            val launches = response.docs.map { LaunchDomain(it.id, it.name) }
+            val launches = response.docs.map { LaunchDomain(it.id, it.name, it.links.patch.small) }
             val nextKey = response.nextPage
             LoadResult.Page(
                 data = launches,

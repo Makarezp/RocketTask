@@ -4,15 +4,16 @@ package com.task.spacex.ui.main
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.RequestManager
 import com.task.spacex.repository.LaunchDomain
+import javax.inject.Inject
 
-/**
- * A simple adapter implementation that shows Reddit posts.
- */
-class LaunchAdapter() : PagingDataAdapter<LaunchDomain, LaunchViewHolder>(LAUNCH_COMPARATOR) {
+class LaunchAdapter @Inject constructor(
+    private val requestManager: RequestManager
+) : PagingDataAdapter<LaunchDomain, LaunchViewHolder>(LAUNCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
-        return LaunchViewHolder.create(parent)
+        return LaunchViewHolder.create(parent, requestManager)
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
@@ -30,9 +31,6 @@ class LaunchAdapter() : PagingDataAdapter<LaunchDomain, LaunchViewHolder>(LAUNCH
 
             override fun areItemsTheSame(oldItem: LaunchDomain, newItem: LaunchDomain): Boolean =
                 oldItem.id == newItem.id
-
-
         }
-
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.task.spacex.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RocketListFragment : Fragment() {
@@ -20,7 +21,8 @@ class RocketListFragment : Fragment() {
         fun newInstance() = RocketListFragment()
     }
 
-    private lateinit var adapter: LaunchAdapter
+    @Inject
+    lateinit var adapter: LaunchAdapter
     private lateinit var recycler: RecyclerView
 
     private val viewModel by viewModels<RocketListViewModel>()
@@ -38,7 +40,6 @@ class RocketListFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        adapter = LaunchAdapter()
         lifecycleScope.launchWhenCreated {
             viewModel.fetch().collectLatest {
                 adapter.submitData(it)

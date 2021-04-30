@@ -1,29 +1,39 @@
 package com.task.spacex.ui.main
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.task.spacex.R
 import com.task.spacex.databinding.LaunchItemBinding
 import com.task.spacex.repository.LaunchDomain
 
-class LaunchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class LaunchViewHolder(
+    view: View, private val glide: RequestManager
+) : RecyclerView.ViewHolder(view) {
     private val binding = LaunchItemBinding.bind(view)
 
     fun bind(launch: LaunchDomain) {
         binding.rocket.text = launch.rocket
+        glide
+            .load(launch.patchURL)
+            .placeholder(ColorDrawable(Color.LTGRAY))
+            .into(binding.patch)
+
     }
 
     private fun showData(launch: LaunchDomain) {
-       
+
     }
 
     companion object {
-        fun create(parent: ViewGroup): LaunchViewHolder {
+        fun create(parent: ViewGroup, glide: RequestManager): LaunchViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.launch_item, parent, false)
-            return LaunchViewHolder(view)
+            return LaunchViewHolder(view, glide)
         }
     }
 }

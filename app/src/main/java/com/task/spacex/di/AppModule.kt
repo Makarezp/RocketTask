@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+class AppModule {
 
     @Singleton
     @Provides
@@ -28,6 +28,5 @@ class NetworkModule {
             .baseUrl("https://api.spacexdata.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-
 
 }

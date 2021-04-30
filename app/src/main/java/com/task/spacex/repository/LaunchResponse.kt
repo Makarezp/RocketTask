@@ -2,6 +2,7 @@ package com.task.spacex.repository
 
 
 import com.squareup.moshi.Json
+import com.task.spacex.temp.Request
 
 data class LaunchResponse(
     @Json(name = "docs")
@@ -44,5 +45,24 @@ data class LaunchResponse(
         val name: String,
         @Json(name = "rocket")
         val rocket: String,
-    )
+        @Json(name = "links")
+        val links: Links,
+    ) {
+
+        data class Links(
+            @Json(name = "article")
+            val article: String?,
+            @Json(name = "patch")
+            val patch: Patch,
+            @Json(name = "wikipedia")
+            val wikipedia: String?,
+        ) {
+            data class Patch(
+                @Json(name = "large")
+                val large: String?,
+                @Json(name = "small")
+                val small: String?
+            )
+        }
+    }
 }
