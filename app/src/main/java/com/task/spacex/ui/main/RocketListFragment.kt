@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,17 +16,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RocketListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RocketListFragment()
-    }
-
     private var _binding: RocketListFragmentBinding? = null
     private val binding get() = _binding!!
 
     @Inject
     lateinit var adapter: LaunchAdapter
 
-    private val viewModel by viewModels<RocketListViewModel>()
+    private val model by viewModels<RocketListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +40,7 @@ class RocketListFragment : Fragment() {
 
     private fun initFilterButton() {
         binding.filterButton.setOnClickListener {
-
+            FilterDialog().show(parentFragmentManager, FilterDialog::class.simpleName)
         }
     }
 
@@ -53,7 +48,7 @@ class RocketListFragment : Fragment() {
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         lifecycleScope.launchWhenCreated {
-            viewModel.fetch().collectLatest {
+            model.fetch().collectLatest {
                 adapter.submitData(it)
             }
         }

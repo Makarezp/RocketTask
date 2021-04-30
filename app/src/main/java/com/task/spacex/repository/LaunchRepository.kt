@@ -8,17 +8,17 @@ import javax.inject.Inject
 
 
 class LaunchRepository @Inject constructor(
-    private val launchPagingSource: LaunchPagingSource
+    private val pagingSourceFactory: LaunchPagingSourceFactory
 ) {
 
-    fun getSearchResultStream(): Flow<PagingData<LaunchDomain>> {
+    fun getLaunches(filterDomain: FilterDomain): Flow<PagingData<LaunchDomain>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 40,
                 enablePlaceholders = false,
                 prefetchDistance = 20
             ),
-            pagingSourceFactory = { launchPagingSource }
+            pagingSourceFactory = { pagingSourceFactory.newSource(filterDomain) }
         ).flow
     }
 }

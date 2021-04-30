@@ -4,20 +4,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import retrofit2.HttpException
 import java.io.IOException
-import javax.inject.Inject
 
 private const val INITIAL_PAGE_NUMBER = 1
 
-class LaunchPagingSource @Inject constructor(
-    private val service: ApiService
+class LaunchPagingSource(
+    private val filterDomain: FilterDomain,
+    private val service: ApiService,
+    private val launchRequestMapper: LaunchRequestMapper
 ) : PagingSource<Int, LaunchDomain>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LaunchDomain> {
         return try {
             val key = params.key ?: INITIAL_PAGE_NUMBER
-            val response = service.getLaunches(LaunchRequest(
-                LaunchRequest.Options(params.loadSize, key)
-            ))
+            val loadSize = params.loadSize
+            val response = service.getLaunches(launchRequestMapper.map(filterDomain, loadSize, key))
             val launches = response.docs.map { LaunchDomain(it.id, it.name, it.links.patch.small) }
             val nextKey = response.nextPage
             LoadResult.Page(
@@ -38,7 +38,4 @@ class LaunchPagingSource @Inject constructor(
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
-
-
-
 }

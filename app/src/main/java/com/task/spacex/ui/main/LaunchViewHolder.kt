@@ -18,11 +18,9 @@ class LaunchViewHolder(
 
     fun bind(launch: LaunchDomain) {
         binding.rocket.text = launch.rocket
-        glide
-            .load(launch.patchURL)
+        glide.load(launch.patchURL)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)
-
     }
 
     private fun showData(launch: LaunchDomain) {
