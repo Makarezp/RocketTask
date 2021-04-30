@@ -14,9 +14,9 @@ class LaunchRepository @Inject constructor(
     fun getSearchResultStream(): Flow<PagingData<LaunchDomain>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 40,
                 enablePlaceholders = false,
-                prefetchDistance = 15
+                prefetchDistance = 20
             ),
             pagingSourceFactory = { launchPagingSource }
         ).flow
