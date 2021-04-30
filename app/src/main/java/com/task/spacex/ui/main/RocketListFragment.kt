@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.task.spacex.R
+import com.task.spacex.databinding.RocketListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -21,32 +20,47 @@ class RocketListFragment : Fragment() {
         fun newInstance() = RocketListFragment()
     }
 
+    private var _binding: RocketListFragmentBinding? = null
+    private val binding get() = _binding!!
+
     @Inject
     lateinit var adapter: LaunchAdapter
-    private lateinit var recycler: RecyclerView
 
     private val viewModel by viewModels<RocketListViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-        recycler = view.findViewById(R.id.list)
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = RocketListFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initFilterButton()
+    }
+
+    private fun initFilterButton() {
+        binding.filterButton.setOnClickListener {
+
+        }
     }
 
     private fun initRecycler() {
+        binding.recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(context)
         lifecycleScope.launchWhenCreated {
             viewModel.fetch().collectLatest {
                 adapter.submitData(it)
             }
         }
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
