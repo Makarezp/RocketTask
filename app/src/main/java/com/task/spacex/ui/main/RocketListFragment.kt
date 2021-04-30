@@ -10,21 +10,22 @@ import com.task.spacex.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LaunchListFragment : Fragment() {
+class RocketListFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LaunchListFragment()
+        fun newInstance() = RocketListFragment()
     }
 
-    private val viewModel by viewModels<LaunchListViewModel>()
+    private val viewModel by viewModels<RocketListViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.fetch()
     }
 
 }

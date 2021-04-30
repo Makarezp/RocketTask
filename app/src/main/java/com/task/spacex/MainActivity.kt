@@ -2,7 +2,7 @@ package com.task.spacex
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.task.spacex.ui.main.LaunchListFragment
+import com.task.spacex.ui.main.RocketListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, LaunchListFragment.newInstance())
+                    .replace(R.id.container, RocketListFragment.newInstance())
                     .commitNow()
         }
     }
