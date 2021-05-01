@@ -199,7 +199,6 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
         val fixtRequest: LaunchRequest = fixture()
         val fixtPagingConfig: PagingConfig = fixture()
 
-
         every {
             mockPagingState.config
         } returns fixtPagingConfig
@@ -213,7 +212,6 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
         } returns fixtRequest
 
         coEvery { mockApiService.getLaunches(fixtRequest) } throws IOException()
-
 
         val actual = sut.load(fixtLoadType, mockPagingState)
 
