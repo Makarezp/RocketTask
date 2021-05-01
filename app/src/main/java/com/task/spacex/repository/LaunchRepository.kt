@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
-@ExperimentalPagingApi
 class LaunchRepository @Inject constructor(
     private val pagerFactory: PagerFactory,
 ) {

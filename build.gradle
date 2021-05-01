@@ -21,7 +21,15 @@ allprojects {
         google()
         jcenter()
     }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs +=
+                    "-Xopt-in=androidx.paging.ExperimentalPagingApi,kotlinx.coroutines.ExperimentalCoroutinesApi"
+        }
+    }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
@@ -37,4 +45,7 @@ ext {
     pagingVersion = '3.0.0-rc01'
     glideVersion = '4.12.0'
     roomVersion = "2.3.0-beta02"
+    kFixtureVersion = '0.2.0'
+    mockitoVersion = '3.9.0'
+    mockkVersion = '1.11.0'
 }

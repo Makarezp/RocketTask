@@ -10,7 +10,7 @@ import androidx.room.Query
 interface LaunchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(posts: List<LaunchEntity>)
+    suspend fun insertAll(launches: List<LaunchEntity>)
 
     @Query("SELECT * FROM launches")
     fun getLaunches(): PagingSource<Int, LaunchEntity>

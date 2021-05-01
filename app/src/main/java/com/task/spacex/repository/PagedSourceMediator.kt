@@ -1,26 +1,29 @@
 package com.task.spacex.repository
 
+import androidx.annotation.VisibleForTesting
 import androidx.paging.*
 import androidx.room.withTransaction
 import com.task.spacex.repository.api.ApiService
+import com.task.spacex.repository.api.LaunchEntityMapper
 import com.task.spacex.repository.api.LaunchRequestMapper
 import com.task.spacex.repository.db.*
 import com.task.spacex.repository.domain.FilterDomain
 import retrofit2.HttpException
 import java.io.IOException
 
-@ExperimentalPagingApi
 class PagedSourceMediator(
     private val database: SpaceXDatabase,
     private val launchDao: LaunchDao,
     private val pagedKeyDao: PageKeyDao,
     private val apiService: ApiService,
     private val launchRequestMapper: LaunchRequestMapper,
+    private val launchEntityMapper: LaunchEntityMapper,
     private val filterDomain: FilterDomain
 ) : RemoteMediator<Int, LaunchEntity>() {
 
     companion object {
-        private const val LAUNCH_PAGE_ID = "launch"
+        @VisibleForTesting
+        const val LAUNCH_PAGE_ID = "launch"
     }
 
     override suspend fun load(
@@ -45,7 +48,7 @@ class PagedSourceMediator(
             val loadSize = state.config.pageSize
             val response =
                 apiService.getLaunches(launchRequestMapper.map(filterDomain, loadSize, loadKey))
-            val items = response.docs.map { LaunchEntity(it.id, it.name, it.links.patch.small) }
+            val items = launchEntityMapper.map(response.docs)
             val nextKey = response.nextPage
 
             database.withTransaction {
