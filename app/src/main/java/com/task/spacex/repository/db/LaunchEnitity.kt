@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "launches")
 data class LaunchEntity(
     @PrimaryKey
-    @ColumnInfo(name = "entryId")
+    @ColumnInfo(name = "id")
     val id: String,
     @ColumnInfo(name = "rocket")
     val rocket: String,
     @ColumnInfo(name = "patchUrl")
-    val patchUrl: String
+    val patchUrl: String?
 )

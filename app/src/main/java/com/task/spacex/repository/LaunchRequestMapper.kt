@@ -5,14 +5,14 @@ import javax.inject.Inject
 
 class LaunchRequestMapper @Inject constructor() {
 
-    fun map(filterDomain: FilterDomain, pageSize: Int, page: Int): LaunchRequest {
+    fun map(filterDomain: FilterDomain, pageSize: Int, page: Int?): LaunchRequest {
         return LaunchRequest(
             Query(
                 success = mapSuccessQuery(filterDomain)
             ),
             Options(
                 limit = pageSize,
-                page = page
+                page = page ?: 1
             )
         )
     }

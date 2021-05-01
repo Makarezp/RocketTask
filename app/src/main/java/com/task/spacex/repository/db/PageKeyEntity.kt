@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "pagekeys")
 data class PageKeyEntity(
     @PrimaryKey
-    @ColumnInfo(name = "entityId")
+    @ColumnInfo(name = "id")
     val id: String,
     @ColumnInfo(name= "nextPage")
-    val nextPage: Int
+    val nextPage: Int?
 )

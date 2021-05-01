@@ -1,24 +1,29 @@
 package com.task.spacex.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import androidx.paging.*
+import com.task.spacex.repository.db.LaunchEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
+@ExperimentalPagingApi
 class LaunchRepository @Inject constructor(
-    private val pagingSourceFactory: LaunchPagingSourceFactory
+    private val pagerFactory: PagerFactory,
 ) {
 
-    fun getLaunches(filterDomain: FilterDomain): Flow<PagingData<LaunchDomain>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 40,
-                enablePlaceholders = false,
-                prefetchDistance = 20
-            ),
-            pagingSourceFactory = { pagingSourceFactory.newSource(filterDomain) }
-        ).flow
-    }
+    fun getLaunches(filterDomain: FilterDomain): Flow<PagingData<LaunchDomain>> =
+        pagerFactory.newPager(filterDomain)
+            .flow
+            .map { data -> mapPagingData(data) }
+
+    private fun mapPagingData(data: PagingData<LaunchEntity>) =
+        data.map { entity ->
+            LaunchDomain(
+                entity.id,
+                entity.rocket,
+                entity.patchUrl
+            )
+        }
+
 }
