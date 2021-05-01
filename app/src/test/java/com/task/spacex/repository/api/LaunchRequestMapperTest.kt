@@ -18,7 +18,7 @@ class LaunchRequestMapperTest : UnitTestBase<LaunchRequestMapper>() {
         return LaunchRequestMapper()
     }
 
-    override fun setupFixture() {
+    override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(Status::class.java, Status.All)
     }

@@ -11,7 +11,7 @@ class FilterRepositoryTest : UnitTestBase<FilterRepository>() {
         return FilterRepository()
     }
 
-    override fun setupFixture() {
+    override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(FilterDomain.Status::class.java, FilterDomain.Status.Success)
     }

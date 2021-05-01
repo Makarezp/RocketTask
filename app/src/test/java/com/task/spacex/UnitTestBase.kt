@@ -1,9 +1,6 @@
 package com.task.spacex
 
 import com.flextrade.jfixture.FixtureAnnotations
-import com.flextrade.jfixture.FluentCustomisation
-import com.flextrade.jfixture.customisation.Customisation
-import com.flextrade.jfixture.customisation.OmitAutoPropertyCustomisation
 import com.flextrade.kfixture.KFixture
 import io.mockk.MockKAnnotations
 import org.junit.Before
@@ -18,12 +15,18 @@ abstract class UnitTestBase<T : Any> {
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        setupFixture()
-        sut = buildSut()
+        customiseFixture()
         FixtureAnnotations.initFixtures(this, fixture.jFixture)
+        beforeBuildSut()
+        sut = buildSut()
+
     }
 
-    open fun setupFixture() {
+    open fun customiseFixture() {
+    }
+
+    open fun beforeBuildSut() {
+
     }
 
     abstract fun buildSut(): T
