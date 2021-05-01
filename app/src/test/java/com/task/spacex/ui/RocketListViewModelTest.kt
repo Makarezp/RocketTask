@@ -86,7 +86,6 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
         filterFlow.emit(fixFilterDomain3)
 
         assert(actualData.size == 2)
-
         verify(exactly = 1) {
             mockLaunchRepository.getLaunches(fixFilterDomain1)
             mockLaunchRepository.getLaunches(fixFilterDomain3)

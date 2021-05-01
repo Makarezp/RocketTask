@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 class LaunchRepository @Inject constructor(
     private val pagerFactory: PagerFactory,
+    private val launchDomainMapper: LaunchDomainMapper
 ) {
 
     fun getLaunches(filterDomain: FilterDomain): Flow<PagingData<LaunchDomain>> =
@@ -19,12 +20,6 @@ class LaunchRepository @Inject constructor(
             .map { data -> mapPagingData(data) }
 
     private fun mapPagingData(data: PagingData<LaunchEntity>) =
-        data.map { entity ->
-            LaunchDomain(
-                entity.id,
-                entity.rocket,
-                entity.patchUrl
-            )
-        }
+        data.map { entity -> launchDomainMapper.map(entity) }
 
 }
