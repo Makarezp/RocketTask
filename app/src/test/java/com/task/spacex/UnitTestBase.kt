@@ -14,9 +14,9 @@ abstract class UnitTestBase<T: Any> {
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        sut = initSut()
+        sut = buildSut()
     }
 
-    abstract fun initSut() : T
+    abstract fun buildSut() : T
 
 }

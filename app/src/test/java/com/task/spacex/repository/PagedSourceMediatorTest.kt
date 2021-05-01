@@ -62,7 +62,7 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
         }
     }
 
-    override fun initSut(): PagedSourceMediator {
+    override fun buildSut(): PagedSourceMediator {
         return PagedSourceMediator(
             mockDb,
             mockLaunchDao,
