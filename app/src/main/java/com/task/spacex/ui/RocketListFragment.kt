@@ -49,7 +49,7 @@ class RocketListFragment : Fragment() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.setHasFixedSize(true)
         lifecycleScope.launchWhenCreated {
-            model.fetch().collectLatest {
+            model.getLaunches().collectLatest {
                 adapter.submitData(it)
             }
         }

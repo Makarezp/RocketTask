@@ -9,6 +9,7 @@ import com.task.spacex.repository.domain.LaunchDomain
 import com.task.spacex.repository.LaunchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
@@ -18,8 +19,9 @@ class RocketListViewModel @Inject constructor(
     private val filterRepository: FilterRepository
 ) : ViewModel() {
 
-    fun fetch(): Flow<PagingData<LaunchDomain>> =
+    fun getLaunches(): Flow<PagingData<LaunchDomain>> =
         filterRepository.getFilter()
+            .distinctUntilChanged { old, new -> old == new }
             .flatMapLatest { filterDomain -> launchRepository.getLaunches(filterDomain) }
             .cachedIn(viewModelScope)
 }

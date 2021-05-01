@@ -47,7 +47,7 @@ class FilterDialogViewModelTest : UnitTestBase<FilterDialogViewModel>() {
     }
 
     @After
-    fun cleanDispacher() {
+    fun cleanDispatcher() {
         dispatcher.cleanupTestCoroutines()
     }
 
