@@ -2,6 +2,8 @@ package com.task.spacex.repository
 
 import androidx.paging.*
 import com.task.spacex.repository.db.LaunchEntity
+import com.task.spacex.repository.domain.FilterDomain
+import com.task.spacex.repository.domain.LaunchDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

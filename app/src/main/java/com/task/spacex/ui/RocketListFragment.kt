@@ -1,4 +1,4 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.task.spacex.di
+package com.task.spacex
 
 import android.content.Context
 import androidx.fragment.app.Fragment

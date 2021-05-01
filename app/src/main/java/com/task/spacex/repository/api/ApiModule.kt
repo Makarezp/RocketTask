@@ -1,4 +1,4 @@
-package com.task.spacex.repository
+package com.task.spacex.repository.api
 
 import dagger.Module
 import dagger.Provides
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+class ApiModule {
 
     @Singleton
     @Provides

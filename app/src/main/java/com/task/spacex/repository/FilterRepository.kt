@@ -1,5 +1,6 @@
 package com.task.spacex.repository
 
+import com.task.spacex.repository.domain.FilterDomain
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

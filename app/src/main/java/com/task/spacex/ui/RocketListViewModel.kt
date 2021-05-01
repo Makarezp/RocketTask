@@ -1,4 +1,4 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.task.spacex.repository.FilterRepository
-import com.task.spacex.repository.LaunchDomain
+import com.task.spacex.repository.domain.LaunchDomain
 import com.task.spacex.repository.LaunchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

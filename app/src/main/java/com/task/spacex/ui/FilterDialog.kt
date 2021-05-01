@@ -1,4 +1,4 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.task.spacex.R
 import com.task.spacex.databinding.FilterDialogBinding
-import com.task.spacex.repository.FilterDomain
+import com.task.spacex.repository.domain.FilterDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

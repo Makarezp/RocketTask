@@ -1,4 +1,4 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.task.spacex.R
 import com.task.spacex.databinding.LaunchItemBinding
-import com.task.spacex.repository.LaunchDomain
+import com.task.spacex.repository.domain.LaunchDomain
 
 class LaunchViewHolder(
     view: View, private val glide: RequestManager

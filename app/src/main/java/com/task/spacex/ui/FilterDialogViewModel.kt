@@ -1,13 +1,12 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.task.spacex.repository.FilterDomain
-import com.task.spacex.repository.FilterDomain.*
+import com.task.spacex.repository.domain.FilterDomain
+import com.task.spacex.repository.domain.FilterDomain.*
 import com.task.spacex.repository.FilterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

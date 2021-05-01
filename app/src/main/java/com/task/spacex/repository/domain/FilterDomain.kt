@@ -1,4 +1,4 @@
-package com.task.spacex.repository
+package com.task.spacex.repository.domain
 
 data class FilterDomain(val status: Status) {
 

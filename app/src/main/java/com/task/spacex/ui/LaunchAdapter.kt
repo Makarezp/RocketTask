@@ -1,11 +1,11 @@
-package com.task.spacex.ui.main
+package com.task.spacex.ui
 
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
-import com.task.spacex.repository.LaunchDomain
+import com.task.spacex.repository.domain.LaunchDomain
 import javax.inject.Inject
 
 class LaunchAdapter @Inject constructor(

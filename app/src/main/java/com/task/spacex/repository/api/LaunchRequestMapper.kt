@@ -1,5 +1,7 @@
-package com.task.spacex.repository
+package com.task.spacex.repository.api
 
+import com.task.spacex.repository.domain.FilterDomain
+import com.task.spacex.repository.LaunchRequest
 import com.task.spacex.repository.LaunchRequest.*
 import javax.inject.Inject
 
