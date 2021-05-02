@@ -43,6 +43,7 @@ class LaunchActionsViewModel @AssistedInject constructor(
         viewModelScope.launch {
             val domain = launchRepository.getLaunch(launchId)
             val link = linkProvider(domain)
+            // Corner cut - we shouldn't show option in action menu if link is null
             if (link != null) {
                 _openLinkAction.emit(link)
             }

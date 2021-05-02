@@ -44,6 +44,7 @@ class RocketListViewModel @Inject constructor(
             }
             .cachedIn(viewModelScope)
 
+
     fun itemClicked(id: String) {
         viewModelScope.launch {
             _openSheetAction.emit(id)

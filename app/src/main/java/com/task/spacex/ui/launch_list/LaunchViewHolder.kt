@@ -3,7 +3,6 @@ package com.task.spacex.ui.launch_list
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
@@ -12,11 +11,14 @@ import com.task.spacex.databinding.LaunchItemBinding
 import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
 
 class LaunchViewHolder(
-    view: View,
+    parent: ViewGroup,
     private val viewModel: RocketListViewModel,
     private val glide: RequestManager,
-) : RecyclerView.ViewHolder(view) {
-    private val binding = LaunchItemBinding.bind(view)
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context)
+        .inflate(R.layout.launch_item, parent, false)
+) {
+    private val binding = LaunchItemBinding.bind(itemView)
 
     fun bind(uiModel: LaunchItemUiModel) {
         loadImage(uiModel.missionIconUrl)
@@ -45,16 +47,4 @@ class LaunchViewHolder(
         binding.statusIcon.setImageResource(uiModel.statusIcon)
     }
 
-
-    companion object {
-        fun create(
-            parent: ViewGroup,
-            viewModel: RocketListViewModel,
-            glide: RequestManager,
-        ): LaunchViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.launch_item, parent, false)
-            return LaunchViewHolder(view, viewModel, glide)
-        }
-    }
 }

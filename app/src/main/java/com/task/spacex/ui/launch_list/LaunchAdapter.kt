@@ -13,7 +13,7 @@ class LaunchAdapter(
 ) : PagingDataAdapter<LaunchItemUiModel, LaunchViewHolder>(LAUNCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
-        return LaunchViewHolder.create(parent, rocketListViewModel, requestManager)
+        return LaunchViewHolder(parent, rocketListViewModel, requestManager)
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {

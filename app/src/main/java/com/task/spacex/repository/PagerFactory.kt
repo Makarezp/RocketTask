@@ -24,9 +24,8 @@ class PagerFactory @Inject constructor(
     fun newPager(filterDomain: FilterDomain): Pager<Int, LaunchEntity> =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 15,
                 enablePlaceholders = false,
-                prefetchDistance = 10
             ),
             remoteMediator = PagedSourceMediator(
                 database,
