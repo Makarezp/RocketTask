@@ -11,7 +11,7 @@ class LaunchDomainMapper @Inject constructor(){
             entity.id,
             entity.missionName,
             entity.patchUrl,
-            entity.zonedDateTime,
+            entity.offsetDateTime,
             entity.success,
             entity.upcoming
         )

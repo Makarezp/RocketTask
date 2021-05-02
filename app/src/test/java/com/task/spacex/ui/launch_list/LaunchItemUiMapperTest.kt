@@ -7,9 +7,9 @@ import com.task.spacex.repository.domain.LaunchDomain
 import com.task.spacex.util.StringsWrapper
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.time.ZonedDateTime
+import java.time.OffsetDateTime
 
 class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
@@ -57,9 +57,9 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
     @Test
     fun `map date at time label`() {
-        val fixtDate = ZonedDateTime.parse("2020-06-13T05:21:00-04:00")
+        val fixtDate = OffsetDateTime.parse("2020-06-13T05:21:00-04:00")
         val fixtLabel: String = fixture()
-        fixtLaunch = fixtLaunch.copy(zonedDateTime = fixtDate)
+        fixtLaunch = fixtLaunch.copy(offsetDateTime = fixtDate)
 
         every {
             mockStrings.resolve(R.string.date_at_time, "2020-06-13", "05:21 AM")
@@ -97,8 +97,8 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
     @Test
     fun `map days count label since now`() {
         val fixtDaysSince = fixture.range(LongRange(1, 3000))
-        val fixtLaunchDateDate = ZonedDateTime.now().minusDays(fixtDaysSince)
-        val fixtLaunch = fixtLaunch.copy(upcoming = false, zonedDateTime = fixtLaunchDateDate)
+        val fixtLaunchDateDate = OffsetDateTime.now().minusDays(fixtDaysSince)
+        val fixtLaunch = fixtLaunch.copy(upcoming = false, offsetDateTime = fixtLaunchDateDate)
 
         val actual = sut.map(fixtLaunch)
 
@@ -108,8 +108,11 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
     @Test
     fun `map days count label from now`() {
         val fixtDaysFrom = fixture.range(LongRange(1, 3000))
-        val fixtLaunchDateDate = ZonedDateTime.now().plusDays(fixtDaysFrom)
-        val fixtLaunch = fixtLaunch.copy(upcoming = true, zonedDateTime = fixtLaunchDateDate)
+        // Interesting problem -- we need to add some minimal time do days,
+        // plus days is exact -- before code reaches assert it's nominal one day less
+        // that's why we're adding one minute
+        val fixtLaunchDateDate = OffsetDateTime.now().plusDays(fixtDaysFrom).plusMinutes(1)
+        val fixtLaunch = fixtLaunch.copy(upcoming = true, offsetDateTime = fixtLaunchDateDate)
 
         val actual = sut.map(fixtLaunch)
 

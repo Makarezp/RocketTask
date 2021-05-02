@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.task.spacex.util.ZonedDateTimeConverter
-import java.time.ZonedDateTime
+import com.task.spacex.util.OffsetDateTimeConverter
+import java.time.OffsetDateTime
 
 @Database(
     entities = [
@@ -26,12 +26,12 @@ abstract class SpaceXDatabase : RoomDatabase() {
 class Converters {
 
     @TypeConverter
-    fun toString(value: ZonedDateTime): String {
-        return  ZonedDateTimeConverter.toString(value)
+    fun toString(value: OffsetDateTime): String {
+        return  OffsetDateTimeConverter.toString(value)
     }
 
     @TypeConverter
-    fun toZonedDateTime(value: String): ZonedDateTime {
-        return ZonedDateTimeConverter.fromString(value)
+    fun toZonedDateTime(value: String): OffsetDateTime {
+        return OffsetDateTimeConverter.fromString(value)
     }
 }

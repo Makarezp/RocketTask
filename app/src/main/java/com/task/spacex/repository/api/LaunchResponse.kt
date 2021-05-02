@@ -2,7 +2,7 @@ package com.task.spacex.repository.api
 
 
 import com.squareup.moshi.Json
-import java.time.ZonedDateTime
+import java.time.OffsetDateTime
 
 data class LaunchResponse(
     @Json(name = "docs")
@@ -32,7 +32,7 @@ data class LaunchResponse(
         @Json(name = "id")
         val id: String,
         @Json(name = "date_local")
-        val dateLocal: ZonedDateTime,
+        val dateLocal: OffsetDateTime,
         @Json(name = "date_precision")
         val datePrecision: String,
         @Json(name = "launchpad")

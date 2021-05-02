@@ -20,7 +20,7 @@ class LaunchDomainMapperTest : UnitTestBase<LaunchDomainMapper>() {
         assertEquals(fixtEntity.id, actual.id)
         assertEquals(fixtEntity.missionName, actual.missionName)
         assertEquals(fixtEntity.patchUrl, actual.patchURL)
-        assertEquals(fixtEntity.zonedDateTime, actual.zonedDateTime)
+        assertEquals(fixtEntity.offsetDateTime, actual.offsetDateTime)
         assertEquals(fixtEntity.success, actual.success)
         assertEquals(fixtEntity.upcoming, actual.upcoming)
     }

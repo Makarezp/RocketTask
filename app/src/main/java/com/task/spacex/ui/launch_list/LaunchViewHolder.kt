@@ -17,7 +17,7 @@ class LaunchViewHolder(
     private val binding = LaunchItemBinding.bind(view)
 
     fun bind(launch: LaunchDomain) {
-        binding.rocket.text = launch.zonedDateTime.toString()
+        binding.rocket.text = launch.offsetDateTime.toString()
         glide.load(launch.patchURL)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)
