@@ -8,12 +8,9 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
-import com.task.spacex.repository.domain.LaunchDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,14 +21,17 @@ class RocketListViewModel @Inject constructor(
 ) : ViewModel() {
 
     data class LaunchItemUiModel(
+        val id: String,
         val missionName: String,
         val dateAtTime: String,
         val daysToSince: String,
         val daysCount: String,
         @DrawableRes val statusIcon: Int,
         val missionIconUrl: String?,
-        val domain: LaunchDomain
     )
+
+    private val _openSheetAction = MutableSharedFlow<String>()
+    var openSheetAction =_openSheetAction.asSharedFlow()
 
     fun getLaunches(): Flow<PagingData<LaunchItemUiModel>> =
         filterRepository.getFilter()
@@ -43,4 +43,10 @@ class RocketListViewModel @Inject constructor(
                 }
             }
             .cachedIn(viewModelScope)
+
+    fun itemClicked(id: String) {
+        viewModelScope.launch {
+            _openSheetAction.emit(id)
+        }
+    }
 }

@@ -6,14 +6,14 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
 import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
-import javax.inject.Inject
 
-class LaunchAdapter @Inject constructor(
-    private val requestManager: RequestManager
+class LaunchAdapter(
+    private val requestManager: RequestManager,
+    private val rocketListViewModel: RocketListViewModel,
 ) : PagingDataAdapter<LaunchItemUiModel, LaunchViewHolder>(LAUNCH_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
-        return LaunchViewHolder.create(parent, requestManager)
+        return LaunchViewHolder.create(parent, rocketListViewModel, requestManager)
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
@@ -30,7 +30,7 @@ class LaunchAdapter @Inject constructor(
                 oldItem == newItem
 
             override fun areItemsTheSame(oldItem: LaunchItemUiModel, newItem: LaunchItemUiModel): Boolean =
-                oldItem.domain.id == newItem.domain.id
+                oldItem.id == newItem.id
         }
     }
 }

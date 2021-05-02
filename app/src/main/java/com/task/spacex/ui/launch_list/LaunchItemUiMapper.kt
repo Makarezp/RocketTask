@@ -15,13 +15,13 @@ class LaunchItemUiMapper @Inject constructor(
 
     fun map(launch: LaunchDomain): LaunchItemUiModel =
         LaunchItemUiModel(
+            id = launch.id,
             missionName = launch.missionName,
             dateAtTime = formatDateAtTimeLabel(launch.offsetDateTime),
             daysToSince = resolveToSinceLabel(launch),
             daysCount = resolveDaysCount(launch),
             statusIcon = resolveIcon(launch),
-            missionIconUrl = launch.patchURL,
-            domain = launch
+            missionIconUrl = launch.patchURL
         )
 
     private fun resolveIcon(launch: LaunchDomain): Int {

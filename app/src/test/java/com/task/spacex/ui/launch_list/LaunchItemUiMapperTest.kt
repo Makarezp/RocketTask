@@ -33,6 +33,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
     fun `direct mapping fields`() {
         val actual = sut.map(fixtLaunch)
 
+        assertEquals(fixtLaunch.id, actual.id)
         assertEquals(fixtLaunch.missionName, actual.missionName)
         assertEquals(fixtLaunch.patchURL, actual.missionIconUrl)
     }
