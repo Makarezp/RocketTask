@@ -9,23 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.task.spacex.R
 import com.task.spacex.databinding.LaunchItemBinding
-import com.task.spacex.repository.domain.LaunchDomain
 
 class LaunchViewHolder(
     view: View, private val glide: RequestManager
 ) : RecyclerView.ViewHolder(view) {
     private val binding = LaunchItemBinding.bind(view)
 
-    fun bind(launch: LaunchDomain) {
-        binding.rocket.text = launch.offsetDateTime.toString()
-        glide.load(launch.patchURL)
+    fun bind(uiModel: RocketListViewModel.LaunchItemUiModel) {
+        binding.rocket.text = uiModel.missionNameLabel
+        glide.load(uiModel.missionIconUrl)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)
     }
 
-    private fun showData(launch: LaunchDomain) {
-
-    }
 
     companion object {
         fun create(parent: ViewGroup, glide: RequestManager): LaunchViewHolder {

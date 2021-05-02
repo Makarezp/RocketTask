@@ -19,9 +19,18 @@ class LaunchItemUiMapper @Inject constructor(
             dateAtTimeLabel = formatDateAtTimeLabel(launch.offsetDateTime),
             daysToSinceLabel = resolveToSinceLabel(launch),
             daysCountLabel = resolveDaysCount(launch),
-            statusIcon = if (launch.success) R.drawable.ic_baseline_success else R.drawable.ic_baseline_fail,
-            missionIconUrl = launch.patchURL
+            statusIcon = resolveIcon(launch),
+            missionIconUrl = launch.patchURL,
+            domain = launch
         )
+
+    private fun resolveIcon(launch: LaunchDomain): Int {
+        return when(launch.success) {
+            true -> R.drawable.ic_baseline_success
+            false -> R.drawable.ic_baseline_fail
+            null -> R.drawable.ic_timer
+        }
+    }
 
     private fun resolveToSinceLabel(launch: LaunchDomain): String {
         val stringId = if (launch.upcoming) R.string.to_launch else R.string.since_launch

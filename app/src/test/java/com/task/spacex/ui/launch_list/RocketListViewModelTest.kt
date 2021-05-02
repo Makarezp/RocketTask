@@ -1,11 +1,13 @@
 package com.task.spacex.ui.launch_list
 
 import androidx.paging.PagingData
+import androidx.paging.map
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
 import com.task.spacex.repository.domain.FilterDomain
 import com.task.spacex.repository.domain.LaunchDomain
+import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
@@ -28,6 +30,9 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     @MockK
     private lateinit var mockFilterRepository: FilterRepository
 
+    @MockK
+    private lateinit var mockUiMapper: LaunchItemUiMapper
+
     private var dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 
     override fun before() {
@@ -35,7 +40,7 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     }
 
     override fun buildSut(): RocketListViewModel {
-        return RocketListViewModel(mockLaunchRepository, mockFilterRepository)
+        return RocketListViewModel(mockLaunchRepository, mockFilterRepository, mockUiMapper)
     }
 
     override fun customiseFixture() {
@@ -55,10 +60,13 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
         val fixFilterDomain3: FilterDomain =
             fixFilterDomain1.copy(status = FilterDomain.Status.Failure)
 
+        val launchDomain1: LaunchDomain = fixture()
+        val launchDomain2: LaunchDomain = fixture()
+
         val fixtData1: PagingData<LaunchDomain> = PagingData.from(
             listOf(
-                fixture(),
-                fixture()
+                launchDomain1,
+                launchDomain2
             )
         )
 
@@ -69,12 +77,16 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
             )
         )
 
+        fixtData1.map {
+            print(it)
+        }
+
         val filterFlow = MutableStateFlow(fixFilterDomain1)
         every { mockFilterRepository.getFilter() } returns filterFlow
         every { mockLaunchRepository.getLaunches(fixFilterDomain1) } returns flowOf(fixtData1)
         every { mockLaunchRepository.getLaunches(fixFilterDomain3) } returns flowOf(fixtData2)
 
-        val actualData: MutableList<PagingData<LaunchDomain>> = mutableListOf()
+        val actualData: MutableList<PagingData<LaunchItemUiModel>> = mutableListOf()
 
         val job = launch {
             sut.getLaunches().collect {
@@ -86,10 +98,12 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
         filterFlow.emit(fixFilterDomain3)
 
         assert(actualData.size == 2)
+
         verify(exactly = 1) {
             mockLaunchRepository.getLaunches(fixFilterDomain1)
             mockLaunchRepository.getLaunches(fixFilterDomain3)
         }
+
         job.cancel()
     }
 }

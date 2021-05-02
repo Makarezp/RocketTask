@@ -14,7 +14,7 @@ abstract class UnitTestBase<T : Any> {
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this, relaxUnitFun = true, relaxed = true)
+        MockKAnnotations.init(this, relaxUnitFun = true)
         customiseFixture()
         FixtureAnnotations.initFixtures(this, fixture.jFixture)
         before()

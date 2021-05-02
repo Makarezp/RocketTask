@@ -17,7 +17,7 @@ data class LaunchEntity(
     @ColumnInfo(name = "zonedDate")
     val offsetDateTime: OffsetDateTime,
     @ColumnInfo(name = "success")
-    val success: Boolean,
+    val success: Boolean?,
     @ColumnInfo(name = "upcoming")
     val upcoming: Boolean
 )

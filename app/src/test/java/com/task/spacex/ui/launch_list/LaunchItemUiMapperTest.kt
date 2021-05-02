@@ -6,14 +6,14 @@ import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.domain.LaunchDomain
 import com.task.spacex.util.StringsWrapper
 import io.mockk.every
-import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.OffsetDateTime
 
 class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
-    @MockK
+    @RelaxedMockK
     private lateinit var mockStrings: StringsWrapper
 
     @Fixture
@@ -53,6 +53,15 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
         val actual = sut.map(fixtLaunch)
 
         assertEquals(R.drawable.ic_baseline_fail, actual.statusIcon)
+    }
+
+    @Test
+    fun `maps upcoming status icon`() {
+        fixtLaunch = fixtLaunch.copy(success = null)
+
+        val actual = sut.map(fixtLaunch)
+
+        assertEquals(R.drawable.ic_timer, actual.statusIcon)
     }
 
     @Test

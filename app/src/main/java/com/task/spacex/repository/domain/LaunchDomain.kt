@@ -7,6 +7,6 @@ data class LaunchDomain(
     val missionName: String,
     val patchURL: String?,
     val offsetDateTime: OffsetDateTime,
-    val success: Boolean,
+    val success: Boolean?,
     val upcoming: Boolean
 )
