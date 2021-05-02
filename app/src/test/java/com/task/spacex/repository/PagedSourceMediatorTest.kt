@@ -3,7 +3,7 @@ package com.task.spacex.repository
 import androidx.paging.LoadType
 import androidx.paging.PagingConfig
 import androidx.paging.PagingState
-import androidx.paging.RemoteMediator.*
+import androidx.paging.RemoteMediator.MediatorResult
 import androidx.room.withTransaction
 import com.task.spacex.R
 import com.task.spacex.UnitTestBase
@@ -14,7 +14,6 @@ import com.task.spacex.repository.domain.FilterDomain
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
@@ -145,8 +144,7 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
 
     @Test
     fun refresh() = runBlockingTest {
-        val fixtLoadType = LoadType.APPEND
-        val fixtPageKey: PageKeyEntity = fixture()
+        val fixtLoadType = LoadType.REFRESH
         val fixtResponse: LaunchResponse = fixture()
         val fixtRequest: LaunchRequest = fixture()
         val fixtPagingConfig: PagingConfig = fixture()
@@ -159,12 +157,9 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
             mockPagingState.config
         } returns fixtPagingConfig
 
-        coEvery {
-            mockPageKeyDao.pageKeyById(PagedSourceMediator.LAUNCH_PAGE_ID)
-        } returns fixtPageKey
 
         every {
-            mockRequestMapper.map(mockFilter, fixtPagingConfig.pageSize, fixtPageKey.nextPage)
+            mockRequestMapper.map(mockFilter, fixtPagingConfig.pageSize, null)
         } returns fixtRequest
 
         coEvery { mockApiService.getLaunches(fixtRequest) } returns fixtResponse
