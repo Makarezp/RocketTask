@@ -12,4 +12,7 @@
     <string name="mission_label">Mission:</string>
     <string name="date_label">Date/time:</string>
     <string name="rocket_label">Rocket:</string>
+    <string name="article">Article</string>
+    <string name="video">Video</string>
+    <string name="wikipedia">Wikipedia</string>
 </resources>

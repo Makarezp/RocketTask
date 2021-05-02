@@ -64,8 +64,9 @@ class RocketListFragment : Fragment() {
 
     private fun observeActions() {
         lifecycleScope.launchWhenCreated {
-            viewModel.openSheetAction.collectLatest {
-                LaunchActionSheet().show(parentFragmentManager, LaunchActionSheet::class.simpleName)
+            viewModel.openSheetAction.collectLatest { launchId ->
+                LaunchActionSheet.newInstance(launchId)
+                    .show(parentFragmentManager, LaunchActionSheet::class.simpleName)
             }
         }
     }

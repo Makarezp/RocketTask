@@ -7,12 +7,42 @@
 
 
     <TextView
-        android:id="@+id/txt_download"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:text="Download"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/article_row"
+        style="@style/BottomSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/article"
+        android:clickable="true"
+        android:focusable="true"
+        app:drawableStartCompat="@drawable/ic_article" />
+
+    <TextView
+        android:id="@+id/video_row"
+        style="@style/BottomSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/article_row"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/video"
+        android:clickable="true"
+        android:focusable="true"
+        app:drawableStartCompat="@drawable/ic_video" />
+
+    <TextView
+        android:id="@+id/wikipedia"
+        style="@style/BottomSheetItem"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/video_row"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/wikipedia"
+        android:clickable="true"
+        android:focusable="true"
+        app:drawableStartCompat="@drawable/ic_book" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

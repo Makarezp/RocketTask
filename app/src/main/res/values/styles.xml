@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomSheetItem">
+        <item name="android:textSize">20sp</item>
+        <item name="android:drawablePadding">20dp</item>>
+        <item name="android:padding">15dp</item>
+        <item name="fontFamily">sans-serif-condensed</item>
+    </style>
+
+</resources>
