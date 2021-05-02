@@ -4,7 +4,9 @@ import java.time.ZonedDateTime
 
 data class LaunchDomain(
     val id: String,
-    val rocket: String,
+    val missionName: String,
     val patchURL: String?,
-    val zonedDateTime: ZonedDateTime
+    val zonedDateTime: ZonedDateTime,
+    val success: Boolean,
+    val upcoming: Boolean
 )

@@ -26,7 +26,7 @@ data class LaunchResponse(
     @Json(name = "totalDocs")
     val totalDocs: Int,
     @Json(name = "totalPages")
-    val totalPages: Int
+    val totalPages: Int,
 ) {
     data class Doc(
         @Json(name = "id")
@@ -41,8 +41,12 @@ data class LaunchResponse(
         val name: String,
         @Json(name = "rocket")
         val rocket: String,
+        @Json(name = "success")
+        val success: Boolean,
         @Json(name = "links")
         val links: Links,
+        @Json(name = "upcoming")
+        val upcoming: Boolean,
     ) {
 
         data class Links(

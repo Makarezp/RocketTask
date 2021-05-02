@@ -30,7 +30,7 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
 
     private var dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 
-    override fun beforeBuildSut() {
+    override fun before() {
         Dispatchers.setMain(dispatcher)
     }
 

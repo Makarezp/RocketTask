@@ -4,4 +4,9 @@
     <string name="failure">Failure</string>
     <string name="all">All</string>
     <string name="apply">Apply</string>
+    <string name="date_at_time">%1$s at %2$s</string>
+    <string name="date_format">yyyy-mm-dd</string>
+    <string name="time_format">hh:mm a</string>
+    <string name="to_launch">Days from now</string>
+    <string name="since_launch">Days since now</string>
 </resources>

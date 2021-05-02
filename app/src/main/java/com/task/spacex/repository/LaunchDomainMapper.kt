@@ -9,9 +9,11 @@ class LaunchDomainMapper @Inject constructor(){
     fun map(entity: LaunchEntity): LaunchDomain {
         return LaunchDomain(
             entity.id,
-            entity.rocket,
+            entity.missionName,
             entity.patchUrl,
-            entity.zonedDateTime
+            entity.zonedDateTime,
+            entity.success,
+            entity.upcoming
         )
     }
 }

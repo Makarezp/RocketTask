@@ -36,7 +36,7 @@ class FilterDialogViewModelTest : UnitTestBase<FilterDialogViewModel>() {
             .sameInstance(Status::class.java, Status.Success)
     }
 
-    override fun beforeBuildSut() {
+    override fun before() {
         Dispatchers.setMain(dispatcher)
         filterFlow = MutableStateFlow(fixtFilter)
         every { mockFilterRepo.getFilter() } returns filterFlow

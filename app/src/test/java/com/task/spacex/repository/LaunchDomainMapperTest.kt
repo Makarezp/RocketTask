@@ -2,6 +2,7 @@ package com.task.spacex.repository
 
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.db.LaunchEntity
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class LaunchDomainMapperTest : UnitTestBase<LaunchDomainMapper>() {
@@ -16,9 +17,11 @@ class LaunchDomainMapperTest : UnitTestBase<LaunchDomainMapper>() {
 
         val actual = sut.map(fixtEntity)
 
-        assert(fixtEntity.id == actual.id)
-        assert(fixtEntity.rocket == actual.rocket)
-        assert(fixtEntity.patchUrl == actual.patchURL)
-        assert(fixtEntity.zonedDateTime == actual.zonedDateTime)
+        assertEquals(fixtEntity.id, actual.id)
+        assertEquals(fixtEntity.missionName, actual.missionName)
+        assertEquals(fixtEntity.patchUrl, actual.patchURL)
+        assertEquals(fixtEntity.zonedDateTime, actual.zonedDateTime)
+        assertEquals(fixtEntity.success, actual.success)
+        assertEquals(fixtEntity.upcoming, actual.upcoming)
     }
 }

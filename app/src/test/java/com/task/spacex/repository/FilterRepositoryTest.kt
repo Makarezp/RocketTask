@@ -19,13 +19,16 @@ class FilterRepositoryTest : UnitTestBase<FilterRepository>() {
     @Test
     fun `default filter`() {
         val actual = sut.getFilter().value
+
         assertEquals(FilterDomain.DEFAULT_FILTER_VALUES, actual)
     }
 
     @Test
     fun `set filter`() {
         val fixtFilterDomain: FilterDomain = fixture()
+
         sut.setFilter(fixtFilterDomain)
+
         assertEquals(fixtFilterDomain, sut.getFilter().value)
     }
 }

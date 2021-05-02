@@ -47,8 +47,7 @@ class PagedSourceMediatorTest : UnitTestBase<PagedSourceMediator>() {
     /**
      * Required so that we can mock room's withTransaction
      */
-    @Before
-    fun mockWithTransaction() {
+    override fun before() {
         mockkStatic(
             "androidx.room.RoomDatabaseKt"
         )

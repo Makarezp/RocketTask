@@ -10,10 +10,14 @@ data class LaunchEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,
-    @ColumnInfo(name = "rocket")
-    val rocket: String,
+    @ColumnInfo(name = "missionName")
+    val missionName: String,
     @ColumnInfo(name = "patchUrl")
     val patchUrl: String?,
     @ColumnInfo(name = "zonedDate")
-    val zonedDateTime: ZonedDateTime
+    val zonedDateTime: ZonedDateTime,
+    @ColumnInfo(name = "success")
+    val success: Boolean,
+    @ColumnInfo(name = "upcoming")
+    val upcoming: Boolean
 )
