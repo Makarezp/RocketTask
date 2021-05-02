@@ -3,9 +3,11 @@ package com.task.spacex.repository
 import androidx.paging.Pager
 import androidx.paging.PagingData
 import com.task.spacex.UnitTestBase
+import com.task.spacex.repository.db.LaunchDao
 import com.task.spacex.repository.db.LaunchEntity
 import com.task.spacex.repository.domain.FilterDomain
 import com.task.spacex.repository.domain.LaunchDomain
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
@@ -24,6 +26,9 @@ class LaunchRepositoryTest : UnitTestBase<LaunchRepository>() {
     @MockK
     private lateinit var mockDomainMapper: LaunchDomainMapper
 
+    @MockK
+    private lateinit var mockLaunchDao: LaunchDao
+
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(FilterDomain.Status::class.java, FilterDomain.Status.Success)
@@ -32,8 +37,23 @@ class LaunchRepositoryTest : UnitTestBase<LaunchRepository>() {
     override fun buildSut(): LaunchRepository {
         return LaunchRepository(
             mockPagerFactory,
-            mockDomainMapper
+            mockDomainMapper,
+            mockLaunchDao
         )
+    }
+
+    @Test
+    fun getLaunch() = runBlockingTest {
+        val fixtId: String = fixture()
+        val fixtEntity: LaunchEntity = fixture()
+        val fixtLaunch: LaunchDomain = fixture()
+
+        coEvery { mockLaunchDao.getLaunchById(fixtId) } returns fixtEntity
+        coEvery { mockDomainMapper.map(fixtEntity) } returns fixtLaunch
+
+        val actual = sut.getLaunch(fixtId)
+
+        assertEquals(fixtLaunch, actual)
     }
 
     @Test

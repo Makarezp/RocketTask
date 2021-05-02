@@ -19,5 +19,11 @@ data class LaunchEntity(
     @ColumnInfo(name = "success")
     val success: Boolean?,
     @ColumnInfo(name = "upcoming")
-    val upcoming: Boolean
+    val upcoming: Boolean,
+    @ColumnInfo(name = "webcast")
+    val webcast: String?,
+    @ColumnInfo(name = "article")
+    val article: String?,
+    @ColumnInfo(name = "wikipedia")
+    val wikipedia: String?,
 )

@@ -1,7 +1,9 @@
 package com.task.spacex.repository
 
 import androidx.annotation.VisibleForTesting
-import androidx.paging.*
+import androidx.paging.LoadType
+import androidx.paging.PagingState
+import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.task.spacex.repository.api.ApiService
 import com.task.spacex.repository.api.LaunchEntityMapper
@@ -60,7 +62,6 @@ class PagedSourceMediator(
                 pagedKeyDao.insert(PageKeyEntity(LAUNCH_PAGE_ID, nextKey))
                 launchDao.insertAll(items)
             }
-
             return MediatorResult.Success(endOfPaginationReached = items.isEmpty())
         } catch (e: IOException) {
             return MediatorResult.Error(e)

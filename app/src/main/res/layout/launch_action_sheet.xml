@@ -33,7 +33,7 @@
         app:drawableStartCompat="@drawable/ic_video" />
 
     <TextView
-        android:id="@+id/wikipedia"
+        android:id="@+id/wiki_row"
         style="@style/BottomSheetItem"
         android:layout_width="match_parent"
         android:layout_height="60dp"

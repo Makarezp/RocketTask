@@ -12,6 +12,9 @@ interface LaunchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(launches: List<LaunchEntity>)
 
+    @Query("SELECT * FROM launches WHERE id = :id")
+    suspend fun getLaunchById(id: String): LaunchEntity
+
     @Query("SELECT * FROM launches")
     fun getLaunches(): PagingSource<Int, LaunchEntity>
 

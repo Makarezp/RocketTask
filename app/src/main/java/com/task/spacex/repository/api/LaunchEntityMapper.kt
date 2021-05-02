@@ -13,7 +13,10 @@ class LaunchEntityMapper @Inject constructor() {
                 it.links.patch.small,
                 it.dateLocal,
                 it.success,
-                it.upcoming
+                it.upcoming,
+                it.links.webcast,
+                it.links.article,
+                it.links.wikipedia
             )
         }
     }

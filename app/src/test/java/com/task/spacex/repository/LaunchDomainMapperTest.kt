@@ -23,5 +23,8 @@ class LaunchDomainMapperTest : UnitTestBase<LaunchDomainMapper>() {
         assertEquals(fixtEntity.offsetDateTime, actual.offsetDateTime)
         assertEquals(fixtEntity.success, actual.success)
         assertEquals(fixtEntity.upcoming, actual.upcoming)
+        assertEquals(fixtEntity.webcast, actual.webcast)
+        assertEquals(fixtEntity.article, actual.article)
+        assertEquals(fixtEntity.wikipedia, actual.wikipedia)
     }
 }

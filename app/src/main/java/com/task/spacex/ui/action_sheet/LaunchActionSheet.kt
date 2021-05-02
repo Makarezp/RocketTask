@@ -1,13 +1,19 @@
 package com.task.spacex.ui.action_sheet
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.task.spacex.databinding.LaunchActionSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -51,7 +57,38 @@ class LaunchActionSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupClicks()
+        observeActions()
+    }
 
+    private fun setupClicks() {
+        binding.articleRow.setOnClickListener {
+            viewModel.onArticleClicked()
+        }
+        binding.videoRow.setOnClickListener {
+            viewModel.onVideoClicked()
+        }
+        binding.wikiRow.setOnClickListener {
+            viewModel.onWikiClicked()
+        }
+    }
+
+    private fun observeActions() {
+        lifecycleScope.launchWhenResumed {
+            viewModel.openLinkAction.collectLatest { link ->
+                openLink(link)
+                dismiss()
+            }
+        }
+    }
+
+    private fun openLink(link: String) {
+        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        try {
+            startActivity(appIntent)
+        } catch (e: ActivityNotFoundException) {
+            Timber.d(e)
+        }
     }
 
     override fun onDestroyView() {

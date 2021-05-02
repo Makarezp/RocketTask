@@ -24,7 +24,10 @@ class LaunchEntityMapperTest : UnitTestBase<LaunchEntityMapper>() {
             fixtDoc1.links.patch.small,
             fixtDoc1.dateLocal,
             fixtDoc1.success,
-            fixtDoc1.upcoming
+            fixtDoc1.upcoming,
+            fixtDoc1.links.webcast,
+            fixtDoc1.links.article,
+            fixtDoc1.links.wikipedia
         )
         assertEquals(expected1, actual.first())
     }

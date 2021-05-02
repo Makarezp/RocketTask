@@ -56,6 +56,8 @@ data class LaunchResponse(
             val patch: Patch,
             @Json(name = "wikipedia")
             val wikipedia: String?,
+            @Json(name = "webcast")
+            val webcast: String?,
         ) {
             data class Patch(
                 @Json(name = "large")

@@ -13,7 +13,10 @@ class LaunchDomainMapper @Inject constructor(){
             entity.patchUrl,
             entity.offsetDateTime,
             entity.success,
-            entity.upcoming
+            entity.upcoming,
+            entity.webcast,
+            entity.article,
+            entity.wikipedia
         )
     }
 }

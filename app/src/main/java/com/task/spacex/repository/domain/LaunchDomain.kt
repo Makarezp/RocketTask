@@ -8,5 +8,8 @@ data class LaunchDomain(
     val patchURL: String?,
     val offsetDateTime: OffsetDateTime,
     val success: Boolean?,
-    val upcoming: Boolean
+    val upcoming: Boolean,
+    val webcast: String?,
+    val article: String?,
+    val wikipedia: String?,
 )
