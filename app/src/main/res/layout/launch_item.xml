@@ -1,35 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
     android:clickable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
 
         <ImageView
             android:id="@+id/patch"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/rocket"
+            android:id="@+id/mission_label_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/mission_label"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/patch"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/patch" />
+
+        <TextView
+            android:id="@+id/date_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_label"
+            app:layout_constraintStart_toStartOf="@id/mission_label_text"
+            app:layout_constraintTop_toBottomOf="@id/mission_label_text" />
+
+        <TextView
+            android:id="@+id/rocket_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rocket_label"
+            app:layout_constraintStart_toStartOf="@id/mission_label_text"
+            app:layout_constraintTop_toBottomOf="@id/date_label_text" />
+
+        <TextView
+            android:id="@+id/days_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/mission_label_text"
+            app:layout_constraintTop_toBottomOf="@id/rocket_label_text"
+            tools:text="@string/to_launch" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="mission_label_text,date_label_text,rocket_label_text,days_label_text" />
+
+
+        <TextView
+            android:id="@+id/mission_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:lines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/status_icon"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            app:layout_constraintTop_toTopOf="@id/patch"
+            tools:text="Optimus" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="10/30/2042 at 13:41"
+            app:layout_constraintStart_toStartOf="@id/mission_text"
+            app:layout_constraintEnd_toEndOf="@+id/mission_text"
+            app:layout_constraintTop_toBottomOf="@id/mission_label_text" />
+
+        <TextView
+            android:id="@+id/rocket_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Falcon 9"
+            app:layout_constraintStart_toStartOf="@id/mission_text"
+            app:layout_constraintEnd_toEndOf="@+id/mission_text"
+            app:layout_constraintTop_toBottomOf="@id/date_label_text" />
+
+        <TextView
+            android:id="@+id/days_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/mission_text"
+            app:layout_constraintEnd_toEndOf="@+id/mission_text"
+            app:layout_constraintTop_toBottomOf="@id/rocket_label_text"
+            tools:text="5" />
+
+        <ImageView
+            android:id="@+id/status_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            tools:src="@drawable/ic_baseline_success"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -16,7 +16,11 @@ class LaunchViewHolder(
     private val binding = LaunchItemBinding.bind(view)
 
     fun bind(uiModel: RocketListViewModel.LaunchItemUiModel) {
-        binding.rocket.text = uiModel.missionNameLabel
+        binding.missionText.text = uiModel.missionName
+        binding.dateText.text = uiModel.dateAtTime
+        binding.daysText.text = uiModel.daysCount
+        binding.daysLabelText.text = uiModel.daysToSince
+        binding.statusIcon.setImageResource(uiModel.statusIcon)
         glide.load(uiModel.missionIconUrl)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)

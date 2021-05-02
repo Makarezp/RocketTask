@@ -24,10 +24,10 @@ class RocketListViewModel @Inject constructor(
 ) : ViewModel() {
 
     data class LaunchItemUiModel(
-        val missionNameLabel: String,
-        val dateAtTimeLabel: String,
-        val daysToSinceLabel: String,
-        val daysCountLabel: String,
+        val missionName: String,
+        val dateAtTime: String,
+        val daysToSince: String,
+        val daysCount: String,
         @DrawableRes val statusIcon: Int,
         val missionIconUrl: String?,
         val domain: LaunchDomain

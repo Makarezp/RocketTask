@@ -15,10 +15,10 @@ class LaunchItemUiMapper @Inject constructor(
 
     fun map(launch: LaunchDomain): LaunchItemUiModel =
         LaunchItemUiModel(
-            missionNameLabel = launch.missionName,
-            dateAtTimeLabel = formatDateAtTimeLabel(launch.offsetDateTime),
-            daysToSinceLabel = resolveToSinceLabel(launch),
-            daysCountLabel = resolveDaysCount(launch),
+            missionName = launch.missionName,
+            dateAtTime = formatDateAtTimeLabel(launch.offsetDateTime),
+            daysToSince = resolveToSinceLabel(launch),
+            daysCount = resolveDaysCount(launch),
             statusIcon = resolveIcon(launch),
             missionIconUrl = launch.patchURL,
             domain = launch

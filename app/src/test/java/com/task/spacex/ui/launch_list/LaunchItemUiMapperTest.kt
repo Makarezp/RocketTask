@@ -33,7 +33,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
     fun `direct mapping fields`() {
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtLaunch.missionName, actual.missionNameLabel)
+        assertEquals(fixtLaunch.missionName, actual.missionName)
         assertEquals(fixtLaunch.patchURL, actual.missionIconUrl)
     }
 
@@ -76,7 +76,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtLabel, actual.dateAtTimeLabel)
+        assertEquals(fixtLabel, actual.dateAtTime)
     }
 
     @Test
@@ -88,7 +88,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtLabel, actual.daysToSinceLabel)
+        assertEquals(fixtLabel, actual.daysToSince)
     }
 
     @Test
@@ -100,7 +100,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtLabel, actual.daysToSinceLabel)
+        assertEquals(fixtLabel, actual.daysToSince)
     }
 
     @Test
@@ -111,7 +111,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtDaysSince.toString(), actual.daysCountLabel)
+        assertEquals(fixtDaysSince.toString(), actual.daysCount)
     }
 
     @Test
@@ -125,7 +125,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
 
         val actual = sut.map(fixtLaunch)
 
-        assertEquals(fixtDaysFrom.toString(), actual.daysCountLabel)
+        assertEquals(fixtDaysFrom.toString(), actual.daysCount)
     }
 
 }
