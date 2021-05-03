@@ -28,6 +28,7 @@ class CompanyItemUiMapperTest : UnitTestBase<CompanyItemUiMapper>() {
                 fixtCompany.name,
                 fixtCompany.founderName,
                 fixtCompany.yearFounded.toString(),
+                fixtCompany.employees.toString(),
                 fixtCompany.launchSites.toString(),
                 fixtCompany.valuation.toString()
             )

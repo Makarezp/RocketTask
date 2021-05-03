@@ -11,6 +11,7 @@ import com.task.spacex.repository.api.LaunchRequestMapper
 import com.task.spacex.repository.db.*
 import com.task.spacex.repository.domain.FilterDomain
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 
 class PagedSourceMediator(
@@ -66,6 +67,7 @@ class PagedSourceMediator(
         } catch (e: IOException) {
             return MediatorResult.Error(e)
         } catch (e: HttpException) {
+            Timber.e(e)
             return MediatorResult.Error(e)
         }
     }

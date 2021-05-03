@@ -12,6 +12,8 @@ import com.task.spacex.util.StringsWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,8 +64,16 @@ class RocketListViewModel @Inject constructor(
 
     private fun loadCompanyInfo() {
         viewModelScope.launch {
-            val company = companyRepository.getCompany()
-            _companyItems.emit(successCompanyInfoState(company))
+            try {
+                val company = companyRepository.getCompany()
+                _companyItems.emit(successCompanyInfoState(company))
+            } catch (e: Exception) {
+                when (e) {
+                    is IOException -> Timber.d(e)
+                    else -> Timber.e(e)
+                }
+                _companyItems.emit(errorCompanyInfoState())
+            }
         }
     }
 
@@ -75,4 +85,7 @@ class RocketListViewModel @Inject constructor(
         val companyTextCell = companyItemUiMapper.map(company)
         return listOf(SeparatorCell(strings.resolve(R.string.company)), companyTextCell)
     }
+
+    private fun errorCompanyInfoState(): List<CellUiModel> =
+        emptyList()
 }

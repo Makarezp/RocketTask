@@ -16,6 +16,7 @@ class CompanyItemUiMapper @Inject constructor(
                 company.name,
                 company.founderName,
                 company.yearFounded.toString(),
+                company.employees.toString(),
                 company.launchSites.toString(),
                 company.valuation.toString()
             )

@@ -27,6 +27,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Test
+import java.io.IOException
 
 class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
 
@@ -136,7 +137,7 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     }
 
     @Test
-    fun `companyInfo success`() = dispatcher.runBlockingTest {
+    fun `companyInfo error`() = dispatcher.runBlockingTest {
         val fixtCompany: CompanyDomain = fixture()
         val fixtTextCell: TextCell = fixture()
 
@@ -157,6 +158,29 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
             assertEquals(2, actual.size)
             assertEquals(initialCompanyInfoState(), actual[0])
             assertEquals(loadedCompanyInfoState(fixtTextCell.text), actual[1])
+            job.cancel()
+        }
+    }
+
+    @Test
+    fun `companyInfo success`() = dispatcher.runBlockingTest {
+
+        coEvery { mockCompanyRepository.getCompany() } throws IOException()
+
+        dispatcher.pauseDispatcher {
+            val actual: MutableList<List<CellUiModel>> = mutableListOf()
+            sut = buildSut()
+            actual += sut.companyInfoItems.value
+            val job = launch {
+                sut.companyInfoItems.collect {
+                    actual += it
+                }
+            }
+            dispatcher.runCurrent()
+
+            assertEquals(2, actual.size)
+            assertEquals(initialCompanyInfoState(), actual[0])
+            assertEquals(emptyList<CellUiModel>(), actual[1])
             job.cancel()
         }
     }
