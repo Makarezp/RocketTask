@@ -9,6 +9,6 @@ data class PageKeyEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,
-    @ColumnInfo(name= "nextPage")
+    @ColumnInfo(name = "nextPage")
     val nextPage: Int?
 )

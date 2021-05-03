@@ -1,4 +1,5 @@
 package com.task.spacex.repository.api
+
 import com.squareup.moshi.Json
 
 data class CompanyInfoResponse(

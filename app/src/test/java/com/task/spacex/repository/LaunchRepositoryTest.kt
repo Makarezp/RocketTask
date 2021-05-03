@@ -68,7 +68,7 @@ class LaunchRepositoryTest : UnitTestBase<LaunchRepository>() {
         every { mockPager.flow } returns flowOf(fixtPagingData)
         every { mockPagerFactory.newPager(fixtFilter) } returns mockPager
 
-        val actual:  MutableList<PagingData<LaunchDomain>> = mutableListOf()
+        val actual: MutableList<PagingData<LaunchDomain>> = mutableListOf()
         val job = launch {
             sut.getLaunches(fixtFilter)
                 .collect {

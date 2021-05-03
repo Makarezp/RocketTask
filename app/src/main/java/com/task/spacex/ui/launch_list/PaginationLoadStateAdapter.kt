@@ -12,8 +12,8 @@ class PaginationLoadStateAdapter : LoadStateAdapter<LoadStateViewHolder>() {
     }
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            loadState: LoadState
+        parent: ViewGroup,
+        loadState: LoadState
     ): LoadStateViewHolder {
         return LoadStateViewHolder(parent)
     }

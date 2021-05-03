@@ -13,11 +13,12 @@ data class LaunchCell(
     val daysCount: String,
     @DrawableRes val statusIcon: Int,
     val missionIconUrl: String?,
-): PaginetedCell()
-object Separator: PaginetedCell()
+) : PaginetedCell()
+
+object Separator : PaginetedCell()
 
 sealed class CellUiModel
 
-object LoadingCell: CellUiModel()
-data class TextCell(val text: String): CellUiModel()
-data class SeparatorCell(val text: String): CellUiModel()
+object LoadingCell : CellUiModel()
+data class TextCell(val text: String) : CellUiModel()
+data class SeparatorCell(val text: String) : CellUiModel()

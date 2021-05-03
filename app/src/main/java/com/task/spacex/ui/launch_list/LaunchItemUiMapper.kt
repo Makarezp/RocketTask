@@ -24,7 +24,7 @@ class LaunchItemUiMapper @Inject constructor(
         )
 
     private fun resolveIcon(launch: LaunchDomain): Int {
-        return when(launch.success) {
+        return when (launch.success) {
             true -> R.drawable.ic_baseline_success
             false -> R.drawable.ic_baseline_fail
             null -> R.drawable.ic_timer
@@ -37,7 +37,7 @@ class LaunchItemUiMapper @Inject constructor(
     }
 
     private fun resolveDaysCount(launch: LaunchDomain): String {
-        return if(launch.upcoming) {
+        return if (launch.upcoming) {
             ChronoUnit.DAYS.between(OffsetDateTime.now(), launch.offsetDateTime).toString()
         } else {
             ChronoUnit.DAYS.between(launch.offsetDateTime, OffsetDateTime.now()).toString()

@@ -27,7 +27,7 @@ class Converters {
 
     @TypeConverter
     fun toString(value: OffsetDateTime): String {
-        return  OffsetDateTimeConverter.toString(value)
+        return OffsetDateTimeConverter.toString(value)
     }
 
     @TypeConverter

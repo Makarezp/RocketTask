@@ -56,10 +56,10 @@
         android:id="@+id/dateSortRadioGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/date_year_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_sort_title"
-        app:layout_constraintBottom_toTopOf="@id/date_year_title">
+        app:layout_constraintTop_toBottomOf="@id/date_sort_title">
 
         <RadioButton
             android:id="@+id/ascending_radio"
@@ -77,35 +77,33 @@
     </RadioGroup>
 
     <TextView
-    android:id="@+id/date_year_title"
-    style="@style/TextAppearance.MaterialComponents.Subtitle2"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:text="@string/launch_year"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/dateSortRadioGroup" />
+        android:id="@+id/date_year_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/launch_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateSortRadioGroup" />
 
     <CheckBox
         android:id="@+id/year_checkbox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
         app:layout_constraintBottom_toBottomOf="@id/date_year_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_year_title"
-        app:layout_constraintTop_toTopOf="@id/date_year_title"
-        android:layoutDirection="rtl"
-        />
+        app:layout_constraintTop_toTopOf="@id/date_year_title" />
 
     <NumberPicker
         android:id="@+id/year_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/date_year_title"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/apply_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/apply_button"/>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_year_title" />
 
 
     <Button

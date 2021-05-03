@@ -11,38 +11,38 @@
         style="@style/BottomSheetItem"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="?attr/selectableItemBackground"
-        android:text="@string/article"
         android:clickable="true"
         android:focusable="true"
-        app:drawableStartCompat="@drawable/ic_article" />
+        android:text="@string/article"
+        app:drawableStartCompat="@drawable/ic_article"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/video_row"
         style="@style/BottomSheetItem"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/article_row"
         android:background="?attr/selectableItemBackground"
-        android:text="@string/video"
         android:clickable="true"
         android:focusable="true"
-        app:drawableStartCompat="@drawable/ic_video" />
+        android:text="@string/video"
+        app:drawableStartCompat="@drawable/ic_video"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/article_row" />
 
     <TextView
         android:id="@+id/wiki_row"
         style="@style/BottomSheetItem"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/video_row"
         android:background="?attr/selectableItemBackground"
-        android:text="@string/wikipedia"
         android:clickable="true"
         android:focusable="true"
-        app:drawableStartCompat="@drawable/ic_book" />
+        android:text="@string/wikipedia"
+        app:drawableStartCompat="@drawable/ic_book"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/video_row" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

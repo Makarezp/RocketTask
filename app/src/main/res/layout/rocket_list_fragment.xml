@@ -26,8 +26,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="end"
                 android:background="@null"
-                app:icon="@drawable/ic_filter_list"
-                />
+                app:icon="@drawable/ic_filter_list" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
