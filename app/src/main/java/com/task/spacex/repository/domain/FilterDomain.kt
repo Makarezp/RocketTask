@@ -1,6 +1,6 @@
 package com.task.spacex.repository.domain
 
-data class FilterDomain(val status: Status) {
+data class FilterDomain(val status: Status, val dateSortOrder: SortOrder) {
 
     sealed class Status {
         object Success : Status()
@@ -8,7 +8,12 @@ data class FilterDomain(val status: Status) {
         object All : Status()
     }
 
+    sealed class SortOrder {
+        object Ascending : SortOrder()
+        object Descending : SortOrder()
+    }
+
     companion object {
-        val DEFAULT_FILTER_VALUES = FilterDomain(Status.All)
+        val DEFAULT_FILTER_VALUES = FilterDomain(Status.All, SortOrder.Ascending)
     }
 }

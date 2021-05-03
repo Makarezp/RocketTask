@@ -4,7 +4,8 @@ import com.flextrade.jfixture.annotations.Fixture
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.domain.FilterDomain
-import com.task.spacex.repository.domain.FilterDomain.*
+import com.task.spacex.repository.domain.FilterDomain.SortOrder
+import com.task.spacex.repository.domain.FilterDomain.Status
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
@@ -34,6 +35,8 @@ class FilterDialogViewModelTest : UnitTestBase<FilterDialogViewModel>() {
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(Status::class.java, Status.Success)
+        fixture.jFixture.customise()
+            .sameInstance(SortOrder::class.java, SortOrder.Ascending)
     }
 
     override fun before() {

@@ -3,7 +3,8 @@ package com.task.spacex.repository.api
 import com.flextrade.jfixture.annotations.Fixture
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.domain.FilterDomain
-import com.task.spacex.repository.domain.FilterDomain.*
+import com.task.spacex.repository.domain.FilterDomain.SortOrder
+import com.task.spacex.repository.domain.FilterDomain.Status
 import junit.framework.Assert.*
 import org.junit.Test
 
@@ -21,6 +22,8 @@ class LaunchRequestMapperTest : UnitTestBase<LaunchRequestMapper>() {
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(Status::class.java, Status.All)
+        fixture.jFixture.customise()
+            .sameInstance(SortOrder::class.java, SortOrder.Ascending)
     }
 
     @Test
@@ -66,4 +69,23 @@ class LaunchRequestMapperTest : UnitTestBase<LaunchRequestMapper>() {
 
         assertFalse(actual.query.success!!)
     }
+
+    @Test
+    fun `map ascending date`() {
+        fixtFilterDomain = fixtFilterDomain.copy(dateSortOrder = SortOrder.Ascending)
+
+        val actual = sut.map(fixtFilterDomain, fixPageSize, fixtPage)
+
+        assertEquals(LaunchRequest.Options.Sort.SORT_ASCENDING, actual.options.sort!!.date_utc)
+    }
+
+    @Test
+    fun `map descending date`() {
+        fixtFilterDomain = fixtFilterDomain.copy(dateSortOrder = SortOrder.Descending)
+
+        val actual = sut.map(fixtFilterDomain, fixPageSize, fixtPage)
+
+        assertEquals(LaunchRequest.Options.Sort.SORT_DESCENDING, actual.options.sort!!.date_utc)
+    }
+
 }

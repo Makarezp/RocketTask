@@ -32,6 +32,8 @@ class LaunchRepositoryTest : UnitTestBase<LaunchRepository>() {
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(FilterDomain.Status::class.java, FilterDomain.Status.Success)
+        fixture.jFixture.customise()
+            .sameInstance(FilterDomain.SortOrder::class.java, FilterDomain.SortOrder.Ascending)
     }
 
     override fun buildSut(): LaunchRepository {

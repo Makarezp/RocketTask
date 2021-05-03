@@ -18,7 +18,25 @@ data class LaunchRequest(
         @Json(name = "limit")
         val limit: Int,
         @Json(name = "page")
-        val page: Int
-    )
+        val page: Int,
+        @Json(name = "sort")
+        val sort: Sort?
+    ) {
 
+        data class Sort(
+            val date_utc: String
+        ) {
+
+            companion object {
+                const val SORT_ASCENDING = "asc"
+                const val SORT_DESCENDING = "desc"
+            }
+
+        }
+
+    }
 }
+
+
+
+

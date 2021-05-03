@@ -75,6 +75,8 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(FilterDomain.Status::class.java, FilterDomain.Status.All)
+        fixture.jFixture.customise()
+            .sameInstance(FilterDomain.SortOrder::class.java, FilterDomain.SortOrder.Ascending)
     }
 
     @After

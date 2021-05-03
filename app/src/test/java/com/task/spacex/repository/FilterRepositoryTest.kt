@@ -2,7 +2,7 @@ package com.task.spacex.repository
 
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.domain.FilterDomain
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class FilterRepositoryTest : UnitTestBase<FilterRepository>() {
@@ -14,6 +14,8 @@ class FilterRepositoryTest : UnitTestBase<FilterRepository>() {
     override fun customiseFixture() {
         fixture.jFixture.customise()
             .sameInstance(FilterDomain.Status::class.java, FilterDomain.Status.Success)
+        fixture.jFixture.customise()
+            .sameInstance(FilterDomain.SortOrder::class.java, FilterDomain.SortOrder.Ascending)
     }
 
     @Test
