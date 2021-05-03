@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.task.spacex.databinding.RocketListFragmentBinding
@@ -28,7 +29,8 @@ class RocketListFragment : Fragment() {
     @Inject
     lateinit var glide: RequestManager
 
-    lateinit var adapter: LaunchAdapter
+    lateinit var topItemsAdapter: ItemAdapter
+    lateinit var launchItemsAdapter: PaginatedLaunchAdapter
 
     private val viewModel by viewModels<RocketListViewModel>()
 
@@ -54,18 +56,35 @@ class RocketListFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        adapter = LaunchAdapter(glide, viewModel)
-        binding.recycler.adapter = adapter.withLoadStateFooter(LoadStateAdapter())
+        launchItemsAdapter = PaginatedLaunchAdapter(glide, viewModel)
+        val loadStateAdapter = PaginationLoadStateAdapter()
+        launchItemsAdapter.addLoadStateListener {
+            loadStateAdapter.loadState = it.append
+        }
+        topItemsAdapter = ItemAdapter()
+        val concatAdapter = ConcatAdapter(
+            topItemsAdapter,
+            launchItemsAdapter,
+            loadStateAdapter
+        )
+
+        binding.recycler.adapter = concatAdapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.setHasFixedSize(true)
         lifecycleScope.launchWhenCreated {
-            viewModel.getLaunches().collectLatest {
-                adapter.submitData(it)
+            viewModel.getPaginatedLaunches().collectLatest {
+                launchItemsAdapter.submitData(it)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated{
+            viewModel.companyInfoItems.collectLatest {
+                topItemsAdapter.submitList(it)
             }
         }
 
         lifecycleScope.launchWhenCreated {
-            adapter.loadStateFlow
+            launchItemsAdapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
                 .collectLatest { binding.recycler.scrollToPosition(0) }

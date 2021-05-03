@@ -1,13 +1,12 @@
 package com.task.spacex.ui.launch_list
 
-import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import androidx.paging.map
+import androidx.paging.*
+import com.task.spacex.R
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
+import com.task.spacex.util.StringsWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,30 +16,36 @@ import javax.inject.Inject
 class RocketListViewModel @Inject constructor(
     private val launchRepository: LaunchRepository,
     private val filterRepository: FilterRepository,
-    private val launchItemUiMapper: LaunchItemUiMapper
+    private val launchItemUiMapper: LaunchItemUiMapper,
+    private val strings: StringsWrapper
 ) : ViewModel() {
 
-    data class LaunchItemUiModel(
-        val id: String,
-        val missionName: String,
-        val dateAtTime: String,
-        val daysToSince: String,
-        val daysCount: String,
-        @DrawableRes val statusIcon: Int,
-        val missionIconUrl: String?,
-    )
-
     private val _openSheetAction = MutableSharedFlow<String>()
-    var openSheetAction =_openSheetAction.asSharedFlow()
+    var openSheetAction = _openSheetAction.asSharedFlow()
 
-    fun getLaunches(): Flow<PagingData<LaunchItemUiModel>> =
+    private val _companyItems: MutableStateFlow<List<CellUiModel>> =
+        MutableStateFlow(initialCompanyInfoState())
+    val companyInfoItems = _companyItems.asStateFlow()
+
+    init {
+        loadCompanyInfo()
+    }
+
+    fun getPaginatedLaunches(): Flow<PagingData<PaginetedCell>> =
         filterRepository.getFilter()
             .distinctUntilChanged { old, new -> old == new }
             .flatMapLatest { filterDomain -> launchRepository.getLaunches(filterDomain) }
             .map { data ->
                 data.map { launch ->
-                    launchItemUiMapper.map(launch)
+                    val paginetedCell = launchItemUiMapper.map(launch) as PaginetedCell
+                    paginetedCell
                 }
+            }
+            .map { data ->
+                data.insertHeaderItem(
+                    terminalSeparatorType = TerminalSeparatorType.SOURCE_COMPLETE,
+                    item = Separator
+                )
             }
             .cachedIn(viewModelScope)
 
@@ -50,4 +55,18 @@ class RocketListViewModel @Inject constructor(
             _openSheetAction.emit(id)
         }
     }
+
+    private fun loadCompanyInfo() {
+        viewModelScope.launch {
+            _companyItems.emit(successCompanyInfoState())
+        }
+    }
+
+    private fun initialCompanyInfoState(): List<CellUiModel> =
+        listOf(SeparatorCell(strings.resolve(R.string.company)), LoadingCell)
+
+
+    private fun successCompanyInfoState(): List<CellUiModel> =
+        listOf(SeparatorCell(strings.resolve(R.string.company)), TextCell("Test"))
+
 }

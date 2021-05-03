@@ -2,15 +2,18 @@ package com.task.spacex.ui.launch_list
 
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.flextrade.jfixture.annotations.Fixture
+import com.task.spacex.R
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
 import com.task.spacex.repository.domain.FilterDomain
 import com.task.spacex.repository.domain.LaunchDomain
-import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
+import com.task.spacex.util.StringsWrapper
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
@@ -33,14 +36,26 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     @MockK
     private lateinit var mockUiMapper: LaunchItemUiMapper
 
+    @MockK
+    lateinit var mockStrings: StringsWrapper
+
+    @Fixture
+    lateinit var fixtCompanyName: String
+
     private var dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 
     override fun before() {
         Dispatchers.setMain(dispatcher)
+        every { mockStrings.resolve(R.string.company) } returns  fixtCompanyName
     }
 
     override fun buildSut(): RocketListViewModel {
-        return RocketListViewModel(mockLaunchRepository, mockFilterRepository, mockUiMapper)
+        return RocketListViewModel(
+            mockLaunchRepository,
+            mockFilterRepository,
+            mockUiMapper,
+            mockStrings
+        )
     }
 
     override fun customiseFixture() {
@@ -86,10 +101,10 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
         every { mockLaunchRepository.getLaunches(fixFilterDomain1) } returns flowOf(fixtData1)
         every { mockLaunchRepository.getLaunches(fixFilterDomain3) } returns flowOf(fixtData2)
 
-        val actualData: MutableList<PagingData<LaunchItemUiModel>> = mutableListOf()
+        val actualData: MutableList<PagingData<PaginetedCell>> = mutableListOf()
 
         val job = launch {
-            sut.getLaunches().collect {
+            sut.getPaginatedLaunches().collect {
                 actualData += it
             }
         }
@@ -106,4 +121,31 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
 
         job.cancel()
     }
+
+    @Test
+    fun `companyInfo success`() = dispatcher.runBlockingTest {
+        dispatcher.pauseDispatcher {
+            val actual: MutableList<List<CellUiModel>> = mutableListOf()
+            sut = buildSut()
+            actual += sut.companyInfoItems.value
+            val job = launch {
+                sut.companyInfoItems.collect {
+                    actual += it
+                }
+            }
+            dispatcher.runCurrent()
+
+            assertEquals(2, actual.size)
+            assertEquals(initialCompanyInfoState(), actual[0])
+            assertEquals(loadedCompanyInfoState(), actual[1])
+            job.cancel()
+        }
+    }
+
+    private fun initialCompanyInfoState(): List<CellUiModel> =
+        listOf(SeparatorCell(fixtCompanyName), LoadingCell)
+
+    private fun loadedCompanyInfoState(): List<CellUiModel> =
+        listOf(SeparatorCell(fixtCompanyName), TextCell("Test"))
+
 }

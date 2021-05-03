@@ -15,4 +15,6 @@
     <string name="article">Article</string>
     <string name="video">Video</string>
     <string name="wikipedia">Wikipedia</string>
+    <string name="company">Company</string>
+    <string name="launches">Launches</string>
 </resources>

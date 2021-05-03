@@ -2,7 +2,6 @@ package com.task.spacex.ui.launch_list
 
 import com.task.spacex.R
 import com.task.spacex.repository.domain.LaunchDomain
-import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
 import com.task.spacex.util.StringsWrapper
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -13,8 +12,8 @@ class LaunchItemUiMapper @Inject constructor(
     private val strings: StringsWrapper
 ) {
 
-    fun map(launch: LaunchDomain): LaunchItemUiModel =
-        LaunchItemUiModel(
+    fun map(launch: LaunchDomain): LaunchCell =
+        LaunchCell(
             id = launch.id,
             missionName = launch.missionName,
             dateAtTime = formatDateAtTimeLabel(launch.offsetDateTime),
@@ -44,8 +43,6 @@ class LaunchItemUiMapper @Inject constructor(
             ChronoUnit.DAYS.between(launch.offsetDateTime, OffsetDateTime.now()).toString()
         }
     }
-
-
 
     private fun formatDateAtTimeLabel(dateTime: OffsetDateTime): String {
         val dateFormat = strings.resolve(R.string.date_format)

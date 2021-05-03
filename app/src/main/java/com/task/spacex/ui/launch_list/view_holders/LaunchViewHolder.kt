@@ -1,4 +1,4 @@
-package com.task.spacex.ui.launch_list
+package com.task.spacex.ui.launch_list.view_holders
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.task.spacex.R
 import com.task.spacex.databinding.LaunchItemBinding
-import com.task.spacex.ui.launch_list.RocketListViewModel.LaunchItemUiModel
+import com.task.spacex.ui.launch_list.LaunchCell
+import com.task.spacex.ui.launch_list.RocketListViewModel
 
 class LaunchViewHolder(
     parent: ViewGroup,
@@ -20,13 +21,13 @@ class LaunchViewHolder(
 ) {
     private val binding = LaunchItemBinding.bind(itemView)
 
-    fun bind(uiModel: LaunchItemUiModel) {
+    fun bind(uiModel: LaunchCell) {
         loadImage(uiModel.missionIconUrl)
         bindViews(uiModel)
         setUpClicks(uiModel)
     }
 
-    private fun setUpClicks(uiModel: LaunchItemUiModel) {
+    private fun setUpClicks(uiModel: LaunchCell) {
         binding.root.setOnClickListener {
             viewModel.itemClicked(uiModel.id)
         }
@@ -39,7 +40,7 @@ class LaunchViewHolder(
 
     }
 
-    private fun bindViews(uiModel: LaunchItemUiModel) {
+    private fun bindViews(uiModel: LaunchCell) {
         binding.missionText.text = uiModel.missionName
         binding.dateText.text = uiModel.dateAtTime
         binding.daysText.text = uiModel.daysCount

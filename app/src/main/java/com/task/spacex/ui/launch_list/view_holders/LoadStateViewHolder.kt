@@ -1,4 +1,4 @@
-package com.task.spacex.ui.launch_list
+package com.task.spacex.ui.launch_list.view_holders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
