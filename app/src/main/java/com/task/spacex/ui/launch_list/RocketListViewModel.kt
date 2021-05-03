@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.task.spacex.R
+import com.task.spacex.repository.CompanyRepository
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
+import com.task.spacex.repository.domain.CompanyDomain
 import com.task.spacex.util.StringsWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,7 +19,9 @@ class RocketListViewModel @Inject constructor(
     private val launchRepository: LaunchRepository,
     private val filterRepository: FilterRepository,
     private val launchItemUiMapper: LaunchItemUiMapper,
-    private val strings: StringsWrapper,
+    private val companyItemUiMapper: CompanyItemUiMapper,
+    private val companyRepository: CompanyRepository,
+    private val strings: StringsWrapper
 ) : ViewModel() {
 
     private val _openSheetAction = MutableSharedFlow<String>()
@@ -58,7 +62,8 @@ class RocketListViewModel @Inject constructor(
 
     private fun loadCompanyInfo() {
         viewModelScope.launch {
-            _companyItems.emit(successCompanyInfoState())
+            val company = companyRepository.getCompany()
+            _companyItems.emit(successCompanyInfoState(company))
         }
     }
 
@@ -66,7 +71,8 @@ class RocketListViewModel @Inject constructor(
         listOf(SeparatorCell(strings.resolve(R.string.company)), LoadingCell)
 
 
-    private fun successCompanyInfoState(): List<CellUiModel> =
-        listOf(SeparatorCell(strings.resolve(R.string.company)), TextCell("Test"))
-
+    private fun successCompanyInfoState(company: CompanyDomain): List<CellUiModel> {
+        val companyTextCell = companyItemUiMapper.map(company)
+        return listOf(SeparatorCell(strings.resolve(R.string.company)), companyTextCell)
+    }
 }

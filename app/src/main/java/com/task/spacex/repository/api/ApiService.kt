@@ -10,6 +10,6 @@ interface ApiService {
     suspend fun getLaunches(@Body request: LaunchRequest): LaunchResponse
 
     @GET("v4/company")
-    suspend fun getCompanyInfo(): CompanyInfoResponse
+    suspend fun getCompany(): CompanyInfoResponse
 
 }

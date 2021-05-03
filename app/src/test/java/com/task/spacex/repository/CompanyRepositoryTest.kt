@@ -30,10 +30,10 @@ class CompanyRepositoryTest : UnitTestBase<CompanyRepository>() {
     fun getCompanyInfo() = runBlockingTest {
         val fixtResponse: CompanyInfoResponse = fixture()
         val fixtCompany: CompanyDomain = fixture()
-        coEvery { mockApi.getCompanyInfo() } returns fixtResponse
+        coEvery { mockApi.getCompany() } returns fixtResponse
         coEvery { mockResponseMapper.map(fixtResponse) } returns fixtCompany
 
-        val actual = sut.getCompanyInfo()
+        val actual = sut.getCompany()
 
         assertEquals(fixtCompany, actual)
     }

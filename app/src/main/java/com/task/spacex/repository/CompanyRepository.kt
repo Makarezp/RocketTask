@@ -10,8 +10,8 @@ class CompanyRepository @Inject constructor(
     private val companyInfoDomainMapper: CompanyInfoDomainMapper
 ) {
 
-    suspend fun getCompanyInfo(): CompanyDomain {
-        val response = apiService.getCompanyInfo()
+    suspend fun getCompany(): CompanyDomain {
+        val response = apiService.getCompany()
         return companyInfoDomainMapper.map(response)
     }
 }

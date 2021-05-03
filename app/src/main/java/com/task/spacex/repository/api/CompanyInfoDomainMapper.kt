@@ -1,8 +1,9 @@
 package com.task.spacex.repository.api
 
 import com.task.spacex.repository.domain.CompanyDomain
+import javax.inject.Inject
 
-class CompanyInfoDomainMapper {
+class CompanyInfoDomainMapper @Inject constructor() {
 
     fun map(response: CompanyInfoResponse): CompanyDomain {
         return CompanyDomain(
