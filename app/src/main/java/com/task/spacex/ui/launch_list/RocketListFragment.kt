@@ -67,22 +67,32 @@ class RocketListFragment : Fragment() {
             launchItemsAdapter,
             loadStateAdapter
         )
-
         binding.recycler.adapter = concatAdapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.setHasFixedSize(true)
+        scrollToTopOnLoadFinish()
+
+        observePaginatedItems()
+        observeTopItems()
+    }
+
+    private fun observePaginatedItems() {
         lifecycleScope.launchWhenCreated {
             viewModel.getPaginatedLaunches().collectLatest {
                 launchItemsAdapter.submitData(it)
             }
         }
+    }
 
-        lifecycleScope.launchWhenCreated{
+    private fun observeTopItems() {
+        lifecycleScope.launchWhenCreated {
             viewModel.companyInfoItems.collectLatest {
                 topItemsAdapter.submitList(it)
             }
         }
+    }
 
+    private fun scrollToTopOnLoadFinish() {
         lifecycleScope.launchWhenCreated {
             launchItemsAdapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }

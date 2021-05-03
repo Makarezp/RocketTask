@@ -22,4 +22,5 @@
     <string name="oldest_first">Oldest first</string>
     <string name="newest_first">Newest first</string>
     <string name="launch_date">Launch date</string>
+    <string name="launch_year">Launch year</string>
 </resources>

@@ -8,7 +8,7 @@ import com.task.spacex.ui.launch_list.view_holders.LoadStateViewHolder
 class PaginationLoadStateAdapter : LoadStateAdapter<LoadStateViewHolder>() {
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
-        holder.bindTo(loadState)
+        holder.bind(loadState)
     }
 
     override fun onCreateViewHolder(

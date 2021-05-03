@@ -39,6 +39,23 @@ class FilterDialog : DialogFragment() {
         setApplyButtonClicks()
         initDateSortRadios(viewModel.currentFilter.dateSortOrder)
         setDateSortRadioClicks()
+        setUpNumberPicker()
+    }
+
+    private fun setUpNumberPicker() {
+        val minMax = viewModel.minToMaxYears
+        binding.yearPicker.minValue = minMax.first
+        binding.yearPicker.maxValue = minMax.second
+        binding.yearPicker.isEnabled = viewModel.isYearFilterEnabled
+        binding.yearPicker.value = viewModel.selectedYear
+        binding.yearPicker.setOnValueChangedListener { _, _, newVal ->
+            viewModel.onYearValueChanged(newVal)
+        }
+        binding.yearCheckbox.isChecked = viewModel.isYearFilterEnabled
+        binding.yearCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            binding.yearPicker.isEnabled = isChecked
+            viewModel.yearCheckBoxClicked(isChecked, binding.yearPicker.value)
+        }
     }
 
     private fun observeDismissAction() {
