@@ -17,7 +17,7 @@ class RocketListViewModel @Inject constructor(
     private val launchRepository: LaunchRepository,
     private val filterRepository: FilterRepository,
     private val launchItemUiMapper: LaunchItemUiMapper,
-    private val strings: StringsWrapper
+    private val strings: StringsWrapper,
 ) : ViewModel() {
 
     private val _openSheetAction = MutableSharedFlow<String>()

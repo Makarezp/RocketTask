@@ -4,7 +4,7 @@ import com.task.spacex.UnitTestBase
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CompanyInfoDomainMapperTest : UnitTestBase<CompanyInfoDomainMapper>() {
+class CompanyDomainMapperTest : UnitTestBase<CompanyInfoDomainMapper>() {
 
     override fun buildSut(): CompanyInfoDomainMapper {
         return CompanyInfoDomainMapper()
