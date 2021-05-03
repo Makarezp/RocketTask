@@ -29,6 +29,11 @@ class PagedSourceMediator(
         const val LAUNCH_PAGE_ID = "launch"
     }
 
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
+    }
+
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, LaunchEntity>

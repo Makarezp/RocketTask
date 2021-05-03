@@ -47,6 +47,7 @@ class RocketListFragment : Fragment() {
         initRecycler()
         initFilterButton()
         observeActions()
+        initSwipeToRefresh()
     }
 
     private fun initFilterButton() {
@@ -58,6 +59,7 @@ class RocketListFragment : Fragment() {
     private fun initRecycler() {
         launchItemsAdapter = PaginatedLaunchAdapter(glide, viewModel)
         val loadStateAdapter = PaginationLoadStateAdapter()
+
         launchItemsAdapter.addLoadStateListener {
             loadStateAdapter.loadState = it.append
         }
@@ -70,11 +72,26 @@ class RocketListFragment : Fragment() {
         binding.recycler.adapter = concatAdapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.setHasFixedSize(true)
+        observeAdapterLoadingState()
         scrollToTopOnLoadFinish()
-
         observePaginatedItems()
         observeTopItems()
     }
+
+    private fun observeAdapterLoadingState() {
+        lifecycleScope.launchWhenCreated {
+            launchItemsAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+            }
+        }
+    }
+
+    private fun initSwipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            launchItemsAdapter.refresh()
+        }
+    }
+
 
     private fun observePaginatedItems() {
         lifecycleScope.launchWhenCreated {
