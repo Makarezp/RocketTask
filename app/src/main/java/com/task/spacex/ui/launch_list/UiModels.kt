@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 
 
 sealed class PaginetedCell
+
 data class LaunchCell(
     val id: String,
     val missionName: String,
@@ -14,7 +15,6 @@ data class LaunchCell(
     val missionIconUrl: String?,
 ): PaginetedCell()
 object Separator: PaginetedCell()
-
 
 sealed class CellUiModel
 

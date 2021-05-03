@@ -11,8 +11,18 @@ data class LaunchRequest(
 
     data class Query(
         @Json(name = "success")
-        val success: Boolean?
-    )
+        val success: Boolean?,
+        @Json(name = "date_utc")
+        val date_utc: DateUtcParams?
+    ) {
+        data class DateUtcParams(
+            @Json(name = "\$gte")
+            val from: Int,
+            @Json(name = "\$lte")
+            val to: Int
+        )
+
+    }
 
     data class Options(
         @Json(name = "limit")
@@ -35,7 +45,10 @@ data class LaunchRequest(
         }
 
     }
+
 }
+
+
 
 
 

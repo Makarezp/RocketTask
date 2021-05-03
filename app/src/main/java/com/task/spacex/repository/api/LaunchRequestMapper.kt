@@ -11,7 +11,8 @@ class LaunchRequestMapper @Inject constructor() {
     fun map(filterDomain: FilterDomain, pageSize: Int, page: Int?): LaunchRequest {
         return LaunchRequest(
             Query(
-                success = mapSuccessQuery(filterDomain)
+                success = mapSuccessQuery(filterDomain),
+                date_utc = mapDateRange(filterDomain.year)
             ),
             Options(
                 limit = pageSize,
@@ -20,6 +21,17 @@ class LaunchRequestMapper @Inject constructor() {
                     date_utc = mapSort(filterDomain.dateSortOrder)
                 )
             )
+        )
+    }
+
+    private fun mapDateRange(selectedYear: Int?): Query.DateUtcParams? {
+        if (selectedYear == null) {
+            return null
+        }
+
+        return Query.DateUtcParams(
+            selectedYear,
+            selectedYear + 1
         )
     }
 

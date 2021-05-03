@@ -21,8 +21,7 @@ class ItemAdapter : ListAdapter<CellUiModel, RecyclerView.ViewHolder>(DIFF_UTIL)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
-        when (item) {
+        when (val item = getItem(position)) {
             is TextCell -> (holder as TextViewHolder).bind(item)
             is SeparatorCell -> (holder as SeparatorViewHolder).bind(item)
             else -> {

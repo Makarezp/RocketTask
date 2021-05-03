@@ -88,4 +88,25 @@ class LaunchRequestMapperTest : UnitTestBase<LaunchRequestMapper>() {
         assertEquals(LaunchRequest.Options.Sort.SORT_DESCENDING, actual.options.sort!!.date_utc)
     }
 
+    @Test
+    fun `map year to date params when selected`() {
+        val fixtYear: Int = fixture()
+        fixtFilterDomain = fixtFilterDomain.copy(year = fixtYear)
+
+        val actual = sut.map(fixtFilterDomain, fixPageSize, fixtPage)
+
+        assertEquals(fixtYear, actual.query.date_utc!!.from)
+        assertEquals(fixtYear + 1, actual.query.date_utc!!.to)
+    }
+
+    @Test
+    fun `map year to null params when not selected`() {
+        fixtFilterDomain = fixtFilterDomain.copy(year = null)
+
+        val actual = sut.map(fixtFilterDomain, fixPageSize, fixtPage)
+
+        assertNull(actual.query.date_utc)
+    }
+
+
 }

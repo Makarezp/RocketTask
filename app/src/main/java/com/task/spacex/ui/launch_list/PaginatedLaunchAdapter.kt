@@ -58,7 +58,6 @@ class PaginatedLaunchAdapter(
                     else -> true
                 }
 
-
             override fun areItemsTheSame(oldItem: PaginetedCell, newItem: PaginetedCell): Boolean =
                 when {
                     oldItem is LaunchCell && newItem is LaunchCell -> oldItem.id == newItem.id
