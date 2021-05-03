@@ -35,8 +35,7 @@ class PaginatedLaunchAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        return when (item) {
+        return when (getItem(position)) {
             is LaunchCell -> VIEW_TYPE_LAUNCH
             is Separator -> VIEW_TYPE_SEPARATOR
             else -> -1

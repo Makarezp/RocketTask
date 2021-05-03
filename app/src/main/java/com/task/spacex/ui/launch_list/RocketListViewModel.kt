@@ -29,9 +29,9 @@ class RocketListViewModel @Inject constructor(
     private val _openSheetAction = MutableSharedFlow<String>()
     var openSheetAction = _openSheetAction.asSharedFlow()
 
-    private val _companyItems: MutableStateFlow<List<CellUiModel>> =
+    private val _companyInfoItems: MutableStateFlow<List<CellUiModel>> =
         MutableStateFlow(initialCompanyInfoState())
-    val companyInfoItems = _companyItems.asStateFlow()
+    val companyInfoItems = _companyInfoItems.asStateFlow()
 
     init {
         loadCompanyInfo()
@@ -66,13 +66,13 @@ class RocketListViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val company = companyRepository.getCompany()
-                _companyItems.emit(successCompanyInfoState(company))
+                _companyInfoItems.emit(successCompanyInfoState(company))
             } catch (e: Exception) {
                 when (e) {
                     is IOException -> Timber.d(e)
                     else -> Timber.e(e)
                 }
-                _companyItems.emit(errorCompanyInfoState())
+                _companyInfoItems.emit(errorCompanyInfoState())
             }
         }
     }

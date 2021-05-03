@@ -21,7 +21,6 @@ data class LaunchRequest(
             @Json(name = "\$lte")
             val to: Int
         )
-
     }
 
     data class Options(
@@ -36,20 +35,10 @@ data class LaunchRequest(
         data class Sort(
             val date_utc: String
         ) {
-
             companion object {
                 const val SORT_ASCENDING = "asc"
                 const val SORT_DESCENDING = "desc"
             }
-
         }
-
     }
-
 }
-
-
-
-
-
-

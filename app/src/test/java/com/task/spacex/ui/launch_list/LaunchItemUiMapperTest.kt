@@ -28,7 +28,6 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
         every { mockStrings.resolve(R.string.time_format) } returns "hh:mm a"
     }
 
-
     @Test
     fun `direct mapping fields`() {
         val actual = sut.map(fixtLaunch)
