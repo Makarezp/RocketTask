@@ -92,4 +92,16 @@ class FilterDialogViewModelTest : UnitTestBase<FilterDialogViewModel>() {
         sut.allStatusChecked()
         assert(sut.currentFilter == fixtFilter.copy(Status.All))
     }
+
+    @Test
+    fun dateAscChecked() {
+        sut.dateAscChecked()
+        assert(sut.currentFilter == fixtFilter.copy(dateSortOrder = SortOrder.Ascending))
+    }
+
+    @Test
+    fun dateDescChecked() {
+        sut.dateDescChecked()
+        assert(sut.currentFilter == fixtFilter.copy(dateSortOrder = SortOrder.Descending))
+    }
 }

@@ -9,6 +9,7 @@ import com.bumptech.glide.RequestManager
 import com.task.spacex.R
 import com.task.spacex.ui.launch_list.view_holders.LaunchViewHolder
 import com.task.spacex.ui.launch_list.view_holders.SeparatorViewHolder
+import com.task.spacex.util.exhaustive
 
 class PaginatedLaunchAdapter(
     private val requestManager: RequestManager,
@@ -29,7 +30,7 @@ class PaginatedLaunchAdapter(
             when (item) {
                 is LaunchCell -> (holder as LaunchViewHolder).bind(item)
                 is Separator -> (holder as SeparatorViewHolder).bindText(R.string.launches)
-            }
+            }.exhaustive
         }
     }
 

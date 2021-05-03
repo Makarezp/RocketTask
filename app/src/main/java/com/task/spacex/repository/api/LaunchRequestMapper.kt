@@ -27,7 +27,6 @@ class LaunchRequestMapper @Inject constructor() {
         when (sortOrder) {
             is FilterDomain.SortOrder.Ascending -> Sort.SORT_ASCENDING
             is FilterDomain.SortOrder.Descending -> Sort.SORT_DESCENDING
-
         }
 
     private fun mapSuccessQuery(filterDomain: FilterDomain): Boolean? =

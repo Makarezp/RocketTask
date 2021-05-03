@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.task.spacex.R
 import com.task.spacex.databinding.FilterDialogBinding
 import com.task.spacex.repository.domain.FilterDomain
+import com.task.spacex.util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -19,7 +20,7 @@ class FilterDialog : DialogFragment() {
     private var _binding: FilterDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val model by viewModels<FilterDialogViewModel>()
+    private val viewModel by viewModels<FilterDialogViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,14 +34,16 @@ class FilterDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeDismissAction()
-        setStatusRadioGroup(model.currentFilter.status)
-        setRadioGroupClicks()
+        initStatusRadios(viewModel.currentFilter.status)
+        setStatusRadiosClicks()
         setApplyButtonClicks()
+        initDateSortRadios(viewModel.currentFilter.dateSortOrder)
+        setDateSortRadioClicks()
     }
 
     private fun observeDismissAction() {
         lifecycleScope.launchWhenStarted {
-            model.dismissAction.collect {
+            viewModel.dismissAction.collect {
                 dismiss()
             }
         }
@@ -48,25 +51,41 @@ class FilterDialog : DialogFragment() {
 
     private fun setApplyButtonClicks() {
         binding.applyButton.setOnClickListener {
-            model.applyChanges()
+            viewModel.applyChanges()
         }
     }
 
-    private fun setRadioGroupClicks() {
+    private fun setStatusRadiosClicks() {
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.all_radio_button -> model.allStatusChecked()
-                R.id.success_radio_button -> model.successStatusChecked()
-                R.id.failure_radio_button -> model.failureStatusChecked()
+                R.id.all_radio_button -> viewModel.allStatusChecked()
+                R.id.success_radio_button -> viewModel.successStatusChecked()
+                R.id.failure_radio_button -> viewModel.failureStatusChecked()
             }
         }
     }
 
-    private fun setStatusRadioGroup(status: FilterDomain.Status) {
+    private fun initStatusRadios(status: FilterDomain.Status) {
         when (status) {
             is FilterDomain.Status.All -> binding.allRadioButton.isChecked = true
             is FilterDomain.Status.Success -> binding.successRadioButton.isChecked = true
             is FilterDomain.Status.Failure -> binding.failureRadioButton.isChecked = true
+        }.exhaustive
+    }
+
+    private fun initDateSortRadios(order: FilterDomain.SortOrder) {
+        when (order) {
+            FilterDomain.SortOrder.Ascending -> binding.ascendingRadio.isChecked = true
+            FilterDomain.SortOrder.Descending -> binding.descengingRadio.isChecked = true
+        }
+    }
+
+    private fun setDateSortRadioClicks() {
+        binding.dateSortRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.ascending_radio -> viewModel.dateAscChecked()
+                R.id.descenging_radio -> viewModel.dateDescChecked()
+            }
         }
     }
 

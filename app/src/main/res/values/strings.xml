@@ -18,4 +18,8 @@
     <string name="company">Company</string>
     <string name="launches">Launches</string>
     <string name="company_info"> %1$s was founded by %2$s in %3$s. It has now %4$s employees, %5$s launch sites, and is valued at USD %6$s</string>
+    <string name="status">Status</string>
+    <string name="oldest_first">Oldest first</string>
+    <string name="newest_first">Newest first</string>
+    <string name="launch_date">Launch date</string>
 </resources>
