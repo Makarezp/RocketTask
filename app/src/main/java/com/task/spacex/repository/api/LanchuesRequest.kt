@@ -29,8 +29,14 @@ data class LaunchRequest(
         @Json(name = "page")
         val page: Int,
         @Json(name = "sort")
-        val sort: Sort?
+        val sort: Sort?,
+        @Json(name = "populate")
+        val populate: List<String>
     ) {
+
+        companion object {
+            const val POPULATE_ROCKET = "rocket"
+        }
 
         data class Sort(
             val date_utc: String
@@ -40,5 +46,6 @@ data class LaunchRequest(
                 const val SORT_DESCENDING = "desc"
             }
         }
+
     }
 }

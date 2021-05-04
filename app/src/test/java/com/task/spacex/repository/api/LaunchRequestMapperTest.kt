@@ -108,5 +108,12 @@ class LaunchRequestMapperTest : UnitTestBase<LaunchRequestMapper>() {
         assertNull(actual.query.date_utc)
     }
 
+    @Test
+    fun `populates rocket field`() {
+        val actual = sut.map(fixtFilterDomain, fixPageSize, fixtPage)
+
+        assert(actual.options.populate.contains(LaunchRequest.Options.POPULATE_ROCKET))
+
+    }
 
 }

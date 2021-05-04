@@ -19,7 +19,8 @@ class LaunchRequestMapper @Inject constructor() {
                 page = page ?: 1,
                 sort = Sort(
                     date_utc = mapSort(filterDomain.dateSortOrder)
-                )
+                ),
+                populate = listOf(Options.POPULATE_ROCKET)
             )
         )
     }
