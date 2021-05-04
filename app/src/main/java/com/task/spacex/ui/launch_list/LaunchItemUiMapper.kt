@@ -20,8 +20,13 @@ class LaunchItemUiMapper @Inject constructor(
             daysToSince = resolveToSinceLabel(launch),
             daysCount = resolveDaysCount(launch),
             statusIcon = resolveIcon(launch),
-            missionIconUrl = launch.patchURL
+            missionIconUrl = launch.patchURL,
+            rocket = mapRocket(launch.rocket)
         )
+
+    private fun mapRocket(rocket: LaunchDomain.RocketDomain): String {
+        return "${rocket.name} / ${rocket.type}"
+    }
 
     private fun resolveIcon(launch: LaunchDomain): Int {
         return when (launch.success) {

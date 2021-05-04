@@ -43,6 +43,7 @@ class LaunchViewHolder(
         binding.missionText.text = uiModel.missionName
         binding.dateText.text = uiModel.dateAtTime
         binding.daysText.text = uiModel.daysCount
+        binding.rocketText.text = uiModel.rocket
         binding.daysLabelText.text = uiModel.daysToSince
         binding.statusIcon.setImageResource(uiModel.statusIcon)
     }

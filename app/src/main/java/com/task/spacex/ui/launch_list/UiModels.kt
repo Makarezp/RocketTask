@@ -11,6 +11,7 @@ data class LaunchCell(
     val dateAtTime: String,
     val daysToSince: String,
     val daysCount: String,
+    val rocket: String,
     @DrawableRes val statusIcon: Int,
     val missionIconUrl: String?,
 ) : PaginetedCell()

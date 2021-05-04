@@ -107,7 +107,7 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
     fun `map days count label since now`() {
         val fixtDaysSince = fixture.range(LongRange(1, 3000))
         val fixtLaunchDateDate = OffsetDateTime.now().minusDays(fixtDaysSince)
-        val fixtLaunch = fixtLaunch.copy(upcoming = false, offsetDateTime = fixtLaunchDateDate)
+        fixtLaunch = fixtLaunch.copy(upcoming = false, offsetDateTime = fixtLaunchDateDate)
 
         val actual = sut.map(fixtLaunch)
 
@@ -121,11 +121,20 @@ class LaunchItemUiMapperTest : UnitTestBase<LaunchItemUiMapper>() {
         // plus days is exact -- before code reaches assert it's nominal one day less
         // that's why we're adding one minute
         val fixtLaunchDateDate = OffsetDateTime.now().plusDays(fixtDaysFrom).plusMinutes(1)
-        val fixtLaunch = fixtLaunch.copy(upcoming = true, offsetDateTime = fixtLaunchDateDate)
+        fixtLaunch = fixtLaunch.copy(upcoming = true, offsetDateTime = fixtLaunchDateDate)
 
         val actual = sut.map(fixtLaunch)
 
         assertEquals(fixtDaysFrom.toString(), actual.daysCount)
+    }
+
+    @Test
+    fun `map rocket`() {
+        val expected = "${fixtLaunch.rocket.name} / ${fixtLaunch.rocket.type}"
+
+        val actual = sut.map(fixtLaunch)
+
+        assertEquals(expected, actual.rocket)
     }
 
 }
