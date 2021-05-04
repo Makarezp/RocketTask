@@ -1,10 +1,11 @@
 package com.task.spacex.repository.api
 
 import com.task.spacex.UnitTestBase
+import com.task.spacex.repository.CompanyInfoDomainMapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CompanyDomainMapperTest : UnitTestBase<CompanyInfoDomainMapper>() {
+class CompanyInfoDomainMapperTest : UnitTestBase<CompanyInfoDomainMapper>() {
 
     override fun buildSut(): CompanyInfoDomainMapper {
         return CompanyInfoDomainMapper()

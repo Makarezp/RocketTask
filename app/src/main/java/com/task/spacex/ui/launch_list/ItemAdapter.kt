@@ -10,7 +10,6 @@ import com.task.spacex.ui.launch_list.view_holders.TextViewHolder
 
 class ItemAdapter : ListAdapter<CellUiModel, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             SEPARATOR_VIEW_TYPE -> SeparatorViewHolder(parent)

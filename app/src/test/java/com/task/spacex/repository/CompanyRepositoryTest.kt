@@ -2,9 +2,8 @@ package com.task.spacex.repository
 
 import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.api.ApiService
-import com.task.spacex.repository.api.CompanyInfoDomainMapper
 import com.task.spacex.repository.api.CompanyInfoResponse
-import com.task.spacex.repository.domain.CompanyDomain
+import com.task.spacex.repository.domain.CompanyInfoDomain
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runBlockingTest
@@ -29,12 +28,12 @@ class CompanyRepositoryTest : UnitTestBase<CompanyRepository>() {
     @Test
     fun getCompanyInfo() = runBlockingTest {
         val fixtResponse: CompanyInfoResponse = fixture()
-        val fixtCompany: CompanyDomain = fixture()
+        val fixtCompanyInfo: CompanyInfoDomain = fixture()
         coEvery { mockApi.getCompany() } returns fixtResponse
-        coEvery { mockResponseMapper.map(fixtResponse) } returns fixtCompany
+        coEvery { mockResponseMapper.map(fixtResponse) } returns fixtCompanyInfo
 
-        val actual = sut.getCompany()
+        val actual = sut.getCompanyInfo()
 
-        assertEquals(fixtCompany, actual)
+        assertEquals(fixtCompanyInfo, actual)
     }
 }

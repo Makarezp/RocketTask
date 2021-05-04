@@ -51,5 +51,4 @@ class LaunchItemUiMapper @Inject constructor(
         val time = DateTimeFormatter.ofPattern(timeFormat).format(dateTime).toString()
         return strings.resolve(R.string.date_at_time, date, time)
     }
-
 }

@@ -37,7 +37,6 @@ class LaunchViewHolder(
         glide.load(url)
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(binding.patch)
-
     }
 
     private fun bindViews(uiModel: LaunchCell) {

@@ -1,6 +1,6 @@
 package com.task.spacex.repository.domain
 
-data class CompanyDomain(
+data class CompanyInfoDomain(
     val name: String,
     val founderName: String,
     val yearFounded: Int,

@@ -2,7 +2,7 @@ package com.task.spacex.ui.launch_list
 
 import com.task.spacex.R
 import com.task.spacex.UnitTestBase
-import com.task.spacex.repository.domain.CompanyDomain
+import com.task.spacex.repository.domain.CompanyInfoDomain
 import com.task.spacex.util.StringsWrapper
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -21,20 +21,20 @@ class CompanyItemUiMapperTest : UnitTestBase<CompanyItemUiMapper>() {
     @Test
     fun map() {
         val fixtText: String = fixture()
-        val fixtCompany: CompanyDomain = fixture()
+        val fixtCompanyInfo: CompanyInfoDomain = fixture()
         every {
             strings.resolve(
                 R.string.company_info,
-                fixtCompany.name,
-                fixtCompany.founderName,
-                fixtCompany.yearFounded.toString(),
-                fixtCompany.employees.toString(),
-                fixtCompany.launchSites.toString(),
-                fixtCompany.valuation.toString()
+                fixtCompanyInfo.name,
+                fixtCompanyInfo.founderName,
+                fixtCompanyInfo.yearFounded.toString(),
+                fixtCompanyInfo.employees.toString(),
+                fixtCompanyInfo.launchSites.toString(),
+                fixtCompanyInfo.valuation.toString()
             )
         } returns fixtText
 
-        val actual = sut.map(fixtCompany)
+        val actual = sut.map(fixtCompanyInfo)
 
         assertEquals(TextCell(fixtText), actual)
     }

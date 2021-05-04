@@ -8,7 +8,7 @@ import com.task.spacex.UnitTestBase
 import com.task.spacex.repository.CompanyRepository
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
-import com.task.spacex.repository.domain.CompanyDomain
+import com.task.spacex.repository.domain.CompanyInfoDomain
 import com.task.spacex.repository.domain.FilterDomain
 import com.task.spacex.repository.domain.LaunchDomain
 import com.task.spacex.util.StringsWrapper
@@ -57,7 +57,7 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     override fun before() {
         Dispatchers.setMain(dispatcher)
         every { mockStrings.resolve(R.string.company) } returns fixtCompanyString
-        coEvery { mockCompanyRepository.getCompany() } returns fixture()
+        coEvery { mockCompanyRepository.getCompanyInfo() } returns fixture()
         every { mockCompanyItemUiMapper.map(any()) } returns fixture()
     }
 
@@ -140,11 +140,11 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
 
     @Test
     fun `companyInfo error`() = dispatcher.runBlockingTest {
-        val fixtCompany: CompanyDomain = fixture()
+        val fixtCompanyInfo: CompanyInfoDomain = fixture()
         val fixtTextCell: TextCell = fixture()
 
-        coEvery { mockCompanyRepository.getCompany() } returns fixtCompany
-        every { mockCompanyItemUiMapper.map(fixtCompany) } returns fixtTextCell
+        coEvery { mockCompanyRepository.getCompanyInfo() } returns fixtCompanyInfo
+        every { mockCompanyItemUiMapper.map(fixtCompanyInfo) } returns fixtTextCell
 
         dispatcher.pauseDispatcher {
             val actual: MutableList<List<CellUiModel>> = mutableListOf()
@@ -167,7 +167,7 @@ class RocketListViewModelTest : UnitTestBase<RocketListViewModel>() {
     @Test
     fun `companyInfo success`() = dispatcher.runBlockingTest {
 
-        coEvery { mockCompanyRepository.getCompany() } throws IOException()
+        coEvery { mockCompanyRepository.getCompanyInfo() } throws IOException()
 
         dispatcher.pauseDispatcher {
             val actual: MutableList<List<CellUiModel>> = mutableListOf()

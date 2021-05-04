@@ -33,7 +33,6 @@ class PagedSourceMediator(
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
-
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, LaunchEntity>
@@ -76,5 +75,4 @@ class PagedSourceMediator(
             return MediatorResult.Error(e)
         }
     }
-
 }

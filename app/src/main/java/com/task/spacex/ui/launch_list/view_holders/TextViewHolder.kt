@@ -16,5 +16,4 @@ class TextViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     fun bind(textCell: TextCell) {
         binding.label.text = textCell.text
     }
-
 }

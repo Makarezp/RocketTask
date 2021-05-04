@@ -9,7 +9,7 @@ interface ApiService {
     @POST("/v4/launches/query")
     suspend fun getLaunches(@Body request: LaunchRequest): LaunchResponse
 
-    @GET("v4/company")
+    @GET("/v4/company")
     suspend fun getCompany(): CompanyInfoResponse
 
 }

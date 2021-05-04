@@ -92,7 +92,6 @@ class RocketListFragment : Fragment() {
         }
     }
 
-
     private fun observePaginatedItems() {
         lifecycleScope.launchWhenCreated {
             viewModel.getPaginatedLaunches().collectLatest {
@@ -131,5 +130,4 @@ class RocketListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

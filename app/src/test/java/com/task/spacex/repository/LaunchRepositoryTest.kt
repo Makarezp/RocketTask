@@ -61,7 +61,6 @@ class LaunchRepositoryTest : UnitTestBase<LaunchRepository>() {
     @Test
     fun getLaunches() = runBlockingTest {
         val fixtFilter: FilterDomain = fixture()
-
         val fixtPagingData: PagingData<LaunchEntity> = PagingData.empty()
 
         val mockPager: Pager<Int, LaunchEntity> = mockk()

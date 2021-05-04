@@ -13,7 +13,6 @@ class StringsWrapper @Inject constructor(
     fun resolve(@StringRes stringId: Int, vararg formatArg: Any): String =
         context.getString(stringId, *formatArg)
 
-
     fun resolve(@StringRes stringId: Int): String =
         context.getString(stringId)
 

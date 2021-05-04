@@ -1,7 +1,6 @@
 package com.task.spacex.repository.db
 
 import android.content.Context
-import androidx.room.PrimaryKey
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -22,7 +21,6 @@ class DatabaseModule {
             SpaceXDatabase::class.java,
             "SpaceXRepository.db"
         ).build()
-
 
     @Singleton
     @Provides

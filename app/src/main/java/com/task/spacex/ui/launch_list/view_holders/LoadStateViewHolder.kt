@@ -20,7 +20,6 @@ class LoadStateViewHolder(
     private val progressBar = binding.progressBar
     private val errorMsg = binding.errorMsg
 
-
     fun bind(loadState: LoadState) {
         progressBar.isVisible = loadState is Loading
         errorMsg.isVisible = !(loadState as? Error)?.error?.message.isNullOrBlank()

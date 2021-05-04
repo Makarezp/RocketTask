@@ -7,7 +7,7 @@ import com.task.spacex.R
 import com.task.spacex.repository.CompanyRepository
 import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
-import com.task.spacex.repository.domain.CompanyDomain
+import com.task.spacex.repository.domain.CompanyInfoDomain
 import com.task.spacex.util.StringsWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -55,7 +55,6 @@ class RocketListViewModel @Inject constructor(
             }
             .cachedIn(viewModelScope)
 
-
     fun itemClicked(id: String) {
         viewModelScope.launch {
             _openSheetAction.emit(id)
@@ -65,7 +64,7 @@ class RocketListViewModel @Inject constructor(
     private fun loadCompanyInfo() {
         viewModelScope.launch {
             try {
-                val company = companyRepository.getCompany()
+                val company = companyRepository.getCompanyInfo()
                 _companyInfoItems.emit(successCompanyInfoState(company))
             } catch (e: Exception) {
                 when (e) {
@@ -80,8 +79,7 @@ class RocketListViewModel @Inject constructor(
     private fun initialCompanyInfoState(): List<CellUiModel> =
         listOf(SeparatorCell(strings.resolve(R.string.company)), LoadingCell)
 
-
-    private fun successCompanyInfoState(company: CompanyDomain): List<CellUiModel> {
+    private fun successCompanyInfoState(company: CompanyInfoDomain): List<CellUiModel> {
         val companyTextCell = companyItemUiMapper.map(company)
         return listOf(SeparatorCell(strings.resolve(R.string.company)), companyTextCell)
     }

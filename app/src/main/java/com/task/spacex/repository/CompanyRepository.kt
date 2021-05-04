@@ -1,8 +1,7 @@
 package com.task.spacex.repository
 
 import com.task.spacex.repository.api.ApiService
-import com.task.spacex.repository.api.CompanyInfoDomainMapper
-import com.task.spacex.repository.domain.CompanyDomain
+import com.task.spacex.repository.domain.CompanyInfoDomain
 import javax.inject.Inject
 
 class CompanyRepository @Inject constructor(
@@ -10,7 +9,7 @@ class CompanyRepository @Inject constructor(
     private val companyInfoDomainMapper: CompanyInfoDomainMapper
 ) {
 
-    suspend fun getCompany(): CompanyDomain {
+    suspend fun getCompanyInfo(): CompanyInfoDomain {
         val response = apiService.getCompany()
         return companyInfoDomainMapper.map(response)
     }
