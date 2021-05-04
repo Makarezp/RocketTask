@@ -19,7 +19,7 @@ class LaunchEntityMapper @Inject constructor() {
                 it.links.wikipedia,
                 LaunchEntity.Rocket(
                     it.rocket.name,
-                    it.rocket.type
+                    "${it.rocket.engines.type} ${it.rocket.engines.version}"
                 )
             )
         }

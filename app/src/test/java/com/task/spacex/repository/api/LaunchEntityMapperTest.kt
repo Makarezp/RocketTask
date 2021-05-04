@@ -20,7 +20,7 @@ class LaunchEntityMapperTest : UnitTestBase<LaunchEntityMapper>() {
 
         val expectedRocket = LaunchEntity.Rocket(
             fixtDoc1.rocket.name,
-            fixtDoc1.rocket.type
+            "${fixtDoc1.rocket.engines.type} ${fixtDoc1.rocket.engines.version}"
         )
 
         val expectedLaunch = LaunchEntity(

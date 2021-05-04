@@ -94,7 +94,23 @@ data class LaunchResponse(
         @Json(name = "type")
         val type: String,
         @Json(name = "wikipedia")
-        val wikipedia: String
-    )
+        val wikipedia: String,
+        @Json(name ="engines")
+        val engines: Engines
+    ) {
+
+        data class Engines(
+            @Json(name = "engine_loss_max")
+            val engineLossMax: Int,
+            @Json(name = "layout")
+            val layout: String,
+            @Json(name = "number")
+            val number: Int,
+            @Json(name = "type")
+            val type: String,
+            @Json(name = "version")
+            val version: String
+        )
+    }
 
 }
