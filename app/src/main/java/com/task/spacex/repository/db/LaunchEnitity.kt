@@ -1,6 +1,7 @@
 package com.task.spacex.repository.db
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.OffsetDateTime
@@ -26,4 +27,14 @@ data class LaunchEntity(
     val article: String?,
     @ColumnInfo(name = "wikipedia")
     val wikipedia: String?,
-)
+    @Embedded
+    val rocket: Rocket
+) {
+
+    data class Rocket(
+        @ColumnInfo(name = "name")
+        val name: String,
+        @ColumnInfo(name = "type")
+        val type: String
+    )
+}

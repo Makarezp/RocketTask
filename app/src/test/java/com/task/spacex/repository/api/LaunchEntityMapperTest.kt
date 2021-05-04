@@ -18,7 +18,12 @@ class LaunchEntityMapperTest : UnitTestBase<LaunchEntityMapper>() {
 
         val actual = sut.map(fixtDocs)
 
-        val expected1 = LaunchEntity(
+        val expectedRocket = LaunchEntity.Rocket(
+            fixtDoc1.rocket.name,
+            fixtDoc1.rocket.type
+        )
+
+        val expectedLaunch = LaunchEntity(
             fixtDoc1.id,
             fixtDoc1.name,
             fixtDoc1.links.patch.small,
@@ -27,8 +32,9 @@ class LaunchEntityMapperTest : UnitTestBase<LaunchEntityMapper>() {
             fixtDoc1.upcoming,
             fixtDoc1.links.webcast,
             fixtDoc1.links.article,
-            fixtDoc1.links.wikipedia
+            fixtDoc1.links.wikipedia,
+            expectedRocket,
         )
-        assertEquals(expected1, actual.first())
+        assertEquals(expectedLaunch, actual.first())
     }
 }

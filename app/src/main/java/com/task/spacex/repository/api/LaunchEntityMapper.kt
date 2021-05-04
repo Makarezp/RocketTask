@@ -16,7 +16,11 @@ class LaunchEntityMapper @Inject constructor() {
                 it.upcoming,
                 it.links.webcast,
                 it.links.article,
-                it.links.wikipedia
+                it.links.wikipedia,
+                LaunchEntity.Rocket(
+                    it.rocket.name,
+                    it.rocket.type
+                )
             )
         }
     }
