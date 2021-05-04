@@ -2,6 +2,7 @@ package com.task.spacex.repository
 
 import com.task.spacex.repository.db.LaunchEntity
 import com.task.spacex.repository.domain.LaunchDomain
+import com.task.spacex.repository.domain.LaunchDomain.RocketDomain
 import javax.inject.Inject
 
 class LaunchDomainMapper @Inject constructor() {
@@ -16,7 +17,11 @@ class LaunchDomainMapper @Inject constructor() {
             entity.upcoming,
             entity.webcast,
             entity.article,
-            entity.wikipedia
+            entity.wikipedia,
+            RocketDomain(
+                entity.rocket.name,
+                entity.rocket.type
+            )
         )
     }
 }

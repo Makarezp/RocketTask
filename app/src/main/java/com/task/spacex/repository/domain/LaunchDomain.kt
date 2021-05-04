@@ -12,4 +12,8 @@ data class LaunchDomain(
     val webcast: String?,
     val article: String?,
     val wikipedia: String?,
-)
+    val rocket: RocketDomain
+) {
+
+    data class RocketDomain(val name: String, val type: String)
+}
