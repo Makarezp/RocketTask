@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.task.spacex.repository.LaunchRepository
 import com.task.spacex.repository.domain.LaunchDomain
+import com.task.spacex.util.espressohelpers.launchIdling
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.launch
 
 
 class LaunchActionsViewModel @AssistedInject constructor(
@@ -40,7 +40,7 @@ class LaunchActionsViewModel @AssistedInject constructor(
     }
 
     private fun emitLink(linkProvider: (LaunchDomain) -> String?) {
-        viewModelScope.launch {
+        viewModelScope.launchIdling {
             val domain = launchRepository.getLaunch(launchId)
             val link = linkProvider(domain)
             // Corner cut - we shouldn't show option in action menu if link is null

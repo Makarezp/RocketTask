@@ -9,9 +9,9 @@ import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.LaunchRepository
 import com.task.spacex.repository.domain.CompanyInfoDomain
 import com.task.spacex.util.StringsWrapper
+import com.task.spacex.util.espressohelpers.launchIdling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
@@ -56,13 +56,13 @@ class RocketListViewModel @Inject constructor(
             .cachedIn(viewModelScope)
 
     fun itemClicked(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launchIdling {
             _openSheetAction.emit(id)
         }
     }
 
     private fun loadCompanyInfo() {
-        viewModelScope.launch {
+        viewModelScope.launchIdling {
             try {
                 val company = companyRepository.getCompanyInfo()
                 _companyInfoItems.emit(successCompanyInfoState(company))

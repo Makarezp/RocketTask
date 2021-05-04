@@ -6,10 +6,10 @@ import com.task.spacex.repository.FilterRepository
 import com.task.spacex.repository.domain.FilterDomain
 import com.task.spacex.repository.domain.FilterDomain.SortOrder
 import com.task.spacex.repository.domain.FilterDomain.Status
+import com.task.spacex.util.espressohelpers.launchIdling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -74,7 +74,7 @@ class FilterDialogViewModel @Inject constructor(
 
     fun applyChanges() {
         filterRepository.setFilter(_currentFilter)
-        viewModelScope.launch {
+        viewModelScope.launchIdling {
             _dismissAction.emit(Unit)
         }
     }
